@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Signin from "./components/signin/Signin";
@@ -9,7 +8,6 @@ import Tabs from './components/common/tabs/Tabs';
 
 function App() {
   return (
-    <>
       <Router>
       <Tabs/>
         <Routes>
@@ -20,7 +18,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}></Route>
         </Routes>
       </Router>
-    </>
   );
 }
 
