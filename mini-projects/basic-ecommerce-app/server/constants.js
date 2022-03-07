@@ -1,5 +1,6 @@
-const DB_URL = 'mongodb://localhost/fullstack_test';
+const DB_URL =
+  "mongodb+srv://logic:logic@devconnectorupdated.tgtmc.mongodb.net/book_storeNew?retryWrites=true&w=majority";
 
-module.exports = { 
-    DB_URL
-}; 
+module.exports = {
+  DB_URL,
+};
