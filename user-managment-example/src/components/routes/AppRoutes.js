@@ -5,6 +5,7 @@ import Signup from "../signup/Signup";
 import Home from "../home/Home";
 import Dashboard from "../dashboard/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
+
 export default function AppRoutes() {
   return (
     <Routes>
