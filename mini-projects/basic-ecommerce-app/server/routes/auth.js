@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
+const Buyer = require("../models/buyer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -12,7 +12,7 @@ router.post("/signup/", (req, res) => {
       return res.status(500).json({ error: err });
     }
 
-    const user = new User({
+    const buyer = new Buyer({
       username: username,
       password: hash,
       fullname: fullname,
@@ -20,10 +20,10 @@ router.post("/signup/", (req, res) => {
       type: type,
     });
 
-    user
+    buyer
       .save()
-      .then((newUser) => {
-        res.status(201).json({ user: newUser });
+      .then((newBuyer) => {
+        res.status(201).json({ buyer: newBuyer });
       })
       .catch((err) => {
         res.send(500).json({ error: err });
@@ -32,16 +32,16 @@ router.post("/signup/", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body; 
+  const { username, password } = req.body;
 
   try {
-    const user = await User.find({ username: username.toLowerCase() });
-  
-    if (user.length < 1) {
+    const buyer = await Buyer.find({ username: username.toLowerCase() });
+
+    if (buyer.length < 1) {
       return res.status(204).json({ message: "User Not Found ..." });
     }
- 
-    const result = await bcrypt.compare(password, user[0].password);
+
+    const result = await bcrypt.compare(password, buyer[0].password);
 
     if (!result) {
       return res
@@ -51,17 +51,17 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       {
-        username: user[0].username,
-        email: user[0].email,
-        fullname: user[0].fullname,
-        type: user[0].type,
+        username: buyer[0].username,
+        email: buyer[0].email,
+        fullname: buyer[0].fullname,
+        type: buyer[0].type,
       },
       "this is my secret key",
       { expiresIn: "24h" }
     );
- 
+
     return res.status(200).json({
-      user: user[0],
+      buyer: buyer[0],
       token,
     });
   } catch (err) {

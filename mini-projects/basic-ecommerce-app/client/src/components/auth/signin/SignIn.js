@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignIn.css";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser, userSelector, clearState } from "../../../redux/UserSlice";
+// import { loginUser, userSelector, clearState } from "../../../redux/UserSlice";
 // import { userLogin } from "../../../services/AuthService";
+import { login } from "../../../redux/ApiCalls";
 import { Navigate } from "react-router-dom";
+// import { loginSuccess } from "../../../redux/UserReducer";
 
 const SignIn = ({ updateLoginUser }) => {
-  const dispatch = useDispatch();
-  // const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [validation, setValidation] = useState(true);
-  const [isLoginFaild, setIsLoginFaild] = useState(false);
+  const dispatch = useDispatch();
+  const { isFetching } = useSelector((state) => state.user);
 
-  const { isFetching, isSuccess, isError, errorMessage } =
-    useSelector(userSelector);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   const handleChange = (e) => {
     if (e.target.name === "username") {
       setUsername(e.target.value);
@@ -25,82 +28,60 @@ const SignIn = ({ updateLoginUser }) => {
     }
   };
 
-  const onSubmit = (data) => {
-    dispatch(loginUser(data));
-  };
-  useEffect(() => {
-    return () => {
-      dispatch(clearState());
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isError) {
-      console.error("Error");
-      dispatch(clearState());
-    }
-
-    if (isSuccess) {
-      dispatch(clearState());
-      <Navigate to="/" />;
-    }
-  }, [isError, isSuccess]);
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   login(username, password);
-  // };
   return (
-    <>
-      <div className="wrapper">
-        <div className="logo">
-          <img
-            src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
-            alt=""
-          />
-        </div>
-        <div className="text-center mt-4 name"> Sign In </div>
-        <br />
-        {!validation && (
-          <p className="text-danger text-center">
-            Please Fill Required Fields...
-          </p>
-        )}
-        <form className="p-3 mt-3">
-          <div className="form-field d-flex align-items-center">
-            <span className="far fa-user"></span>
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={handleChange}
-              placeholder="Username"
-              autoComplete="off"
-            />
+    <div className="container mt-4">
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-4 mx-auto">
+          <div className="card shadow-sm p-3 ">
+            <div className="logo">
+              <img
+                src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
+                alt=""
+              />
+            </div>
+            <div className="text-center mt-4"> Sign In </div>
+
+            <form className="mt-3">
+              <div className="form-group col-12 col-lg-11 mx-auto">
+                <input
+                  type="text"
+                  name="username"
+                  value={username}
+                  onChange={handleChange}
+                  placeholder="Username"
+                  className="form-control"
+                  autoComplete="off"
+                />
+              </div>
+              <div className="form-group col-12 col-lg-11 mx-auto">
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group text-center">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={onSubmit}
+                >
+                  Login
+                  {!isFetching ? <Navigate to="/bookstore" /> : ""}
+                </button>
+              </div>
+              <div className="text-center fs-6">
+                <Link to="#!">Forget password?</Link> or{" "}
+                <Link to="/signup">Sign up</Link>
+              </div>
+            </form>
           </div>
-          <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Password"
-            />
-          </div>
-          <button className="btn mt-3" onClick={onSubmit}>
-            Login
-          </button>
-          {isLoginFaild && (
-            <p className="text-danger">Incorrect Usrname or Password... </p>
-          )}
-        </form>
-        <div className="text-center fs-6">
-          <Link to="#!">Forget password?</Link> or{" "}
-          <Link to="/signup">Sign up</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
