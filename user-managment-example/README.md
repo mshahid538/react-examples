@@ -1,9 +1,11 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+#Overview-Scope:
+    This example project is created from scratch by using React and contains basic structure of User Managment and Basic Routing using react-router-dom@6.
 
-## Edit a file
+#Major Modules and Functionality Achieved:
+    Desinged SignIn, SignUp, Home, Dashboard components using react.
+    Also applied some basic routing.
 
-
-## Create a file
-
-## Clone a repository
-
+#How to run:
+    i- Clone the project
+    ii- run command > npm install
+    iii- run command > npm start
