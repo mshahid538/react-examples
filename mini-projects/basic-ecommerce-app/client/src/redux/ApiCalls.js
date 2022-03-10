@@ -1,10 +1,12 @@
 import { loginFailure, loginStart, loginSuccess } from "./UserReducer";
 import { userRequest } from "../requestMethod";
 
-export const login = async (dispatch, user) => {
+//login function
+export const login = async (dispatch, username, password) => {
   dispatch(loginStart());
   try {
-    const res = await userRequest.post("/auth/login", user);
+    const res = await userRequest.post("/auth/login", { username, password });
+    console.log(res.data);
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());

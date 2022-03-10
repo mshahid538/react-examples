@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//authentication slice
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -23,7 +24,6 @@ const userSlice = createSlice({
     logout: (state) => {
       state.isFetching = false;
       state.currentUser = null;
-      return state;
     },
   },
 });

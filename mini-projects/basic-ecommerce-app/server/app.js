@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const { DB_URL } = require("./constants");
 const authRouter = require("./routes/auth");
-// const booksRouter = require("./routes/books");
+const itemsRouter = require("./routes/item");
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRouter);
-// app.use('/books', booksRouter);
+app.use("/items", itemsRouter);
 
 // Port Configuration
 app.listen(5000, () => {

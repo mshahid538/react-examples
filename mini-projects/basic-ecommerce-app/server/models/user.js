@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const buyerSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -21,8 +21,6 @@ const buyerSchema = new mongoose.Schema({
     required: false,
     default: "Admin",
   },
-  // creationdate: {
-  //{ timestamps: true }
 });
 
-module.exports = mongoose.model("Buyer", buyerSchema);
+module.exports = mongoose.model("User", userSchema);

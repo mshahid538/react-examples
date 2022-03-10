@@ -70,7 +70,7 @@ const SignIn = ({ updateLoginUser }) => {
                   onClick={onSubmit}
                 >
                   Login
-                  {!isFetching ? <Navigate to="/bookstore" /> : ""}
+                  {/* {!isFetching ? <Navigate to="/bookstore" /> : ""} */}
                 </button>
               </div>
               <div className="text-center fs-6">

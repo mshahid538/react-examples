@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Buyer = require("../models/buyer");
+const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -12,7 +12,7 @@ router.post("/signup/", (req, res) => {
       return res.status(500).json({ error: err });
     }
 
-    const buyer = new Buyer({
+    const user = new User({
       username: username,
       password: hash,
       fullname: fullname,
@@ -20,10 +20,10 @@ router.post("/signup/", (req, res) => {
       type: type,
     });
 
-    buyer
+    user
       .save()
-      .then((newBuyer) => {
-        res.status(201).json({ buyer: newBuyer });
+      .then((newUser) => {
+        res.status(201).json({ user: newUser });
       })
       .catch((err) => {
         res.send(500).json({ error: err });
@@ -33,15 +33,16 @@ router.post("/signup/", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log(req.body, "asdadwewqeweweweq");
 
   try {
-    const buyer = await Buyer.find({ username: username.toLowerCase() });
-
-    if (buyer.length < 1) {
+    const user = await User.find({ username: username.toLowerCase() });
+    console.log(user, "rrrrrrrrrrrrrrr");
+    if (user.length < 1) {
       return res.status(204).json({ message: "User Not Found ..." });
     }
 
-    const result = await bcrypt.compare(password, buyer[0].password);
+    const result = await bcrypt.compare(password, user[0].password);
 
     if (!result) {
       return res
@@ -51,17 +52,17 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       {
-        username: buyer[0].username,
-        email: buyer[0].email,
-        fullname: buyer[0].fullname,
-        type: buyer[0].type,
+        username: user[0].username,
+        email: user[0].email,
+        fullname: user[0].fullname,
+        type: user[0].type,
       },
       "this is my secret key",
       { expiresIn: "24h" }
     );
 
     return res.status(200).json({
-      buyer: buyer[0],
+      user: user[0],
       token,
     });
   } catch (err) {

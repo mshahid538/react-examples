@@ -20,9 +20,9 @@
 // export default store;
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartReducer, { getTotals } from "./redux/CartSlice";
-import ProductsReducer, { ProductsFetch } from "./redux/ProductSlice";
+import ItemsReducer, { ItemsFetch } from "./redux/ItemSlice";
 import userReducer from "./redux/UserReducer";
-import { ProductApi } from "./redux/ProductApi";
+import { ItemApi } from "./redux/ItemsApi";
 import {
   persistStore,
   persistReducer,
@@ -42,10 +42,10 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  products: ProductsReducer,
+  products: ItemsReducer,
   user: userReducer,
   cart: cartReducer,
-  [ProductApi.reducerPath]: ProductApi.reducer,
+  [ItemApi.reducerPath]: ItemApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -59,7 +59,7 @@ export const store = configureStore({
       },
     }),
 });
-store.dispatch(ProductsFetch());
+store.dispatch(ItemsFetch());
 store.dispatch(getTotals());
 
 export let persistor = persistStore(store);

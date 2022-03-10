@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Products.css";
 import { Navigate } from "react-router-dom";
 import { addToCart } from "../../../redux/CartSlice";
-import { useGetAllProductsQuery } from "../../../redux/ProductApi";
+import { useGetAllProductsQuery } from "../../../redux/ItemsApi";
 
 const Products = () => {
-  const { items: products, status } = useSelector((state) => state.products);
+  const { items: products, status } = useSelector((state) => state.items);
   const dispatch = useDispatch();
 
   const { data, error, isLoading } = useGetAllProductsQuery();
