@@ -1,60 +1,23 @@
-# Getting Started 
+# Overview:
+    This is example project about react-router-dom V6. V6 has came up with some new improvements and improved algorithem to manage the routes.
 
-This project is meant to be a learning react routing with examples. This includes all the routing techniqes in upto dated versions of reactJs. Need to touch every aspect of the react routing, including secure routes, etc. Every example inside the react routing example should be properly directed. This means inside react routing example we may have more than one react routing examples, but should be in proper directories with proper description.
+# Whats new in react-router-dom V6?
+    - Introduced <Routes> : <Switch> depricated.
+    - Route prop component changed to element prop and child component also recommended to use as element(that for sure a jsx element): <Route path='/about' element={<About />} /> //inside element={} jsx can also be used.
+    - exact prop depricated to match the routing schemes.
+    - Use of <Link>
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
+# How to run & use this example project
+    - clone the project
+    - run command: npm install to install all dependencies.
+    - run command: npm react-router-dom@6 if you would like to install router dom V6 manually.
+    - run command: npm start
+    - Follwoing components have been created in the application and guide how to walk through this routing.
+        -1st: Home that can be access while hitting the route "/" or "/home". This is public route.
+        -2nd: is About that can be access while hiting the route "/about". This is public route.
+        -3rd: there two more components Dashboard and Profile and defined as PrivateRoutes and can only be accessed if user is loggedin. To make this example project more functional there are two buttons designed Login / Logout. If you click Login button, user is supposed to loggedin and can access "/dashboard" and "/profile" routes that are defined as PrivateRoutes.
+        - if user clicks on Logout button, user is supposed to Logout from the application and unable to access the route "/profile" or "/dashboard" that are private routes.
+        -4th there is also a "/NotFound" route defined, incase user hit an udefined / unexpected route, the application will handle and redirect to Not Found page.
 
 
-### Code Splitting
-
-
-### Analyzing the Bundle Size
-
-
-### Making a Progressive Web App
-
-
-### Advanced Configuration
-
-
-### Deployment
-
-### `npm run build` fails to minify
 
