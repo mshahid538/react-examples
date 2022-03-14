@@ -33,11 +33,10 @@ router.post("/signup/", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body, "asdadwewqeweweweq");
 
   try {
-    const user = await User.find({ username: username.toLowerCase() });
-    console.log(user, "rrrrrrrrrrrrrrr");
+    const user = await User.find({ username });
+
     if (user.length < 1) {
       return res.status(204).json({ message: "User Not Found ..." });
     }

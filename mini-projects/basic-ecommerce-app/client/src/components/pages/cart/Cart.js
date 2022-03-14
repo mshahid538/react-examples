@@ -6,7 +6,7 @@ import {
   decreaseCart,
   getTotals,
   removeFromCart,
-} from "../../../redux/CartSlice";
+} from "../../../features/CartSlice";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 

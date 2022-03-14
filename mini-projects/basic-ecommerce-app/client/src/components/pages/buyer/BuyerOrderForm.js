@@ -1,11 +1,11 @@
 import React from "react";
-import { DATA_PACKAGE_TYPE } from "../../../../constants";
+import { DATA_PACKAGE_TYPE } from "../../../constants";
 import {
   createBuyOrder,
   updateBuyOrder,
-} from "../../../../services/BuyOrderService";
+} from "../../../services/BuyerOrderService";
 
-const BuyOrderForm = ({ order }) => {
+const BuyerOrderForm = ({ order }) => {
   const [name, setName] = React.useState("");
   const [maxBidPrice, setMaxBidPrice] = React.useState(0);
   const [dataType, setDataType] = React.useState("");
@@ -54,11 +54,11 @@ const BuyOrderForm = ({ order }) => {
     <div className="card p-2 border-0 shadow-sm">
       <h6 className="text-center">Buyer Order Form</h6>
       <div className="mt-2">
-        <div class="form-group ">
+        <div className="form-group my-3">
           <label for="name">Name</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Name"
             onChange={handleChange}
             value={name}
@@ -67,11 +67,11 @@ const BuyOrderForm = ({ order }) => {
             required
           />
         </div>
-        <div class="form-group ">
+        <div className="form-group my-3">
           <label for="name">Max Bid Price*</label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             placeholder="Max Bid Price"
             onChange={handleChange}
             name="maxBidPrice"
@@ -79,10 +79,10 @@ const BuyOrderForm = ({ order }) => {
             error={!isValidated}
           />
         </div>
-        <div class="form-group ">
+        <div className="form-group my-3">
           <label>Data Package Type*</label>
           <select
-            class="form-control"
+            className="form-control"
             value={dataType}
             onChange={handleChange}
             name="dataPackageType"
@@ -96,13 +96,13 @@ const BuyOrderForm = ({ order }) => {
           </select>
         </div>
 
-        <div class="form-group">
-          <div class="d-flex justify-content-around ">
+        <div className="form-group mb-2">
+          <div className="d-flex justify-content-around ">
             {!order ? (
               <div>
                 <button
                   type="submit"
-                  class="btn btn-outline-primary"
+                  className="btn btn-outline-primary"
                   onClick={handleSubmit}
                 >
                   Update
@@ -112,7 +112,7 @@ const BuyOrderForm = ({ order }) => {
               <div>
                 <button
                   type="submit"
-                  class="btn btn-outline-primary"
+                  className="btn btn-outline-primary"
                   onClick={handleSubmit}
                 >
                   Create
@@ -126,4 +126,4 @@ const BuyOrderForm = ({ order }) => {
   );
 };
 
-export default BuyOrderForm;
+export default BuyerOrderForm;

@@ -1,6 +1,6 @@
 import React from "react";
-import BuyOrderTable from "./BuyOrderTable";
-import BuyOrderForm from "./BuyOrderForm";
+import BuyerOrderTable from "./BuyerOrderTable";
+import BuyerOrderForm from "./BuyerOrderForm";
 
 const Buyer = () => {
   const [buyOrder, setBuyOrder] = React.useState(null);
@@ -12,10 +12,10 @@ const Buyer = () => {
     <div className="container mt-4">
       <div className="row">
         <div className="col-12 col-md-12 col-lg-9">
-          <BuyOrderTable onEdit={handleEdit} />
+          <BuyerOrderTable onEdit={handleEdit} />
         </div>
         <div className="col-12 col-md-12 col-lg-3">
-          <BuyOrderForm order={buyOrder} />
+          <BuyerOrderForm order={buyOrder} />
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./Products.css";
-import { Navigate } from "react-router-dom";
-import { addToCart } from "../../../redux/CartSlice";
-import { useGetAllProductsQuery } from "../../../redux/ItemsApi";
+import "./Items.css";
+// import { Navigate } from "react-router-dom";
+import { addToCart } from "../../../features/CartSlice";
+import { useGetAllProductsQuery } from "../../../services/ItemsApi";
 
 const Products = () => {
   const { items: products, status } = useSelector((state) => state.items);
@@ -11,8 +11,8 @@ const Products = () => {
   const { data, error, isLoading } = useGetAllProductsQuery();
   console.log("Api", isLoading);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
     // <Navigate to="/cart" />;
   };
 
@@ -23,17 +23,17 @@ const Products = () => {
           <h2 className="text-center">New Arrivals</h2>
           <div className="row">
             {data &&
-              data?.map((product) => (
+              data?.map((item) => (
                 <div className="col-12 col-sm-12 col-lg-3">
                   <div className="products">
-                    <div key={product.id} className="product">
-                      <h3>{product.title}</h3>
+                    <div key={item.id} className="product">
+                      <h3>{item.title}</h3>
 
                       <div className="details">
-                        <span>{product.author}</span>
-                        <span className="price">${product.price}</span>
+                        <span>{item.author}</span>
+                        <span className="price">${item.price}</span>
                       </div>
-                      <button onClick={() => handleAddToCart(product)}>
+                      <button onClick={() => handleAddToCart(item)}>
                         Add To Cart
                       </button>
                     </div>
