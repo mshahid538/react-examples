@@ -1,7 +1,6 @@
-// export const API_LOGIN_URL = "http://localhost:5000/auth/login";
-export const API_ITEMS_URL = "http://localhost:5000/items";
-
-export const DB_URL = "http://localhost:5000/buyorders";
+export const API_LOGIN_URL = "http://localhost:5000/auth/login";
+export const API_ITEMS_URL = "http://localhost:5000/items"; 
+export const DB_URL = "http://localhost:5000/buyorders"; 
 
 export const DATA_PACKAGE_TYPE = {
   DEVICE_LOCATION: "Device Location",

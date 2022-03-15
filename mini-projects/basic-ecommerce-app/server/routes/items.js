@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Item = require("../models/item");
+const Items = require("../models/items");
 
 router.get("/", async (req, res) => {
   try {
-    const items = await Item.find();
+    const items = await Items.find();
     return res.json(items);
   } catch (err) {
     res.status(500).json({ error: err });
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const item = await Item.findById(req.params.id);
+    const item = await Items.findById(req.params.id);
 
     if (!item) {
       return res.status(404).json({ error: "data not found ..." });
@@ -26,10 +26,10 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const item = new Item({
+  const item = new Items({
     name: req.body.name,
     desc: req.body.desc,
-    categories: req.body.categories,
+    category: req.body.category,
     price: req.body.price,
     date_added: req.body.date_added,
   });
@@ -46,7 +46,7 @@ router.patch("/:id", async (req, res) => {
   const { name, desc, categories, price, date_added } = req.body;
 
   try {
-    let item = await Item.findById(req.params.id);
+    let item = await Items.findById(req.params.id);
 
     if (!item) {
       res.statusCode(404);
@@ -58,7 +58,7 @@ router.patch("/:id", async (req, res) => {
     item.price = price || item.price;
     date_added = date_added || item.date_added;
 
-    const updatedItem = await item.save();
+    const updatedItem = await Items.save();
     return res.json(updatedItem);
   } catch (err) {
     res.status(500).json({ error: err });
@@ -67,7 +67,7 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const item = await Item.deleteOne({ _id: req.params.id });
+    const item = await Items.deleteOne({ _id: req.params.id });
     return res.status(200).json(item);
   } catch (err) {
     res.status(500).json({ error: err });

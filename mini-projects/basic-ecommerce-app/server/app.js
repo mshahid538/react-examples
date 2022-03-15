@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const { DB_URL } = require("./constants");
 const authRouter = require("./routes/auth");
-const itemsRouter = require("./routes/item");
+const itemsRouter = require("./routes/items");
 
 const app = express();
 

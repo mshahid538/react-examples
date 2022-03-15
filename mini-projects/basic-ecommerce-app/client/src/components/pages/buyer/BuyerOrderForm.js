@@ -51,7 +51,7 @@ const BuyerOrderForm = ({ order }) => {
     }
   };
   return (
-    <div className="card p-2 border-0 shadow-sm">
+    <div className="card p-2 border shadow">
       <h6 className="text-center">Buyer Order Form</h6>
       <div className="mt-2">
         <div className="form-group my-3">
@@ -59,7 +59,7 @@ const BuyerOrderForm = ({ order }) => {
           <input
             type="text"
             className="form-control"
-            placeholder="Name"
+            placeholder="name"
             onChange={handleChange}
             value={name}
             name="name"
@@ -72,7 +72,7 @@ const BuyerOrderForm = ({ order }) => {
           <input
             type="number"
             className="form-control"
-            placeholder="Max Bid Price"
+            placeholder="max bid price"
             onChange={handleChange}
             name="maxBidPrice"
             required

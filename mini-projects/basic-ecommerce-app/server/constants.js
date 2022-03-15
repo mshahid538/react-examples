@@ -1,5 +1,5 @@
 const DB_URL =
-  "mongodb+srv://logic:logic@devconnectorupdated.tgtmc.mongodb.net/ecommerce?retryWrites=true&w=majority";
+  "mongodb://localhost/ecommerce_db";
 
 module.exports = {
   DB_URL,

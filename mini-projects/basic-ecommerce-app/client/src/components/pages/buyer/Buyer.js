@@ -9,8 +9,8 @@ const Buyer = () => {
     setBuyOrder(order);
   };
   return (
-    <div className="container mt-4">
-      <div className="row">
+    <div className="container mt-4 p-0">
+      <div className="row p-0">
         <div className="col-12 col-md-12 col-lg-9">
           <BuyerOrderTable onEdit={handleEdit} />
         </div>

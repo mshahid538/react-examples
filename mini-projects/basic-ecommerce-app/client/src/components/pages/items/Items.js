@@ -8,7 +8,7 @@ const Products = () => {
   const { items: products, status } = useSelector((state) => state.items);
   const dispatch = useDispatch();
 
-  const { data, error, isLoading } = useGetAllProductsQuery();
+  const { data, isLoading } = useGetAllProductsQuery();
   console.log("Api", isLoading);
 
   const handleAddToCart = (item) => {

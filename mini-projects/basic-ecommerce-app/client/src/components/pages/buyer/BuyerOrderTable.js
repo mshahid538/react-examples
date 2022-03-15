@@ -52,13 +52,13 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
   };
 
   return (
-    <div className="container">
+    // <div className="container">
       <div className="row">
         <div className="col-lg-11 col-xl-12 mx-auto">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body p-2">
+          <div className="card border shadow">
+            <div className="card-body p-0">
               <div className="table-responsive">
-                <table className="table">
+                <table className="table ">
                   <thead>
                     <tr>
                       <th scope="col" className="text-center text-nowrap ">
@@ -81,8 +81,8 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
                         <td className="text-center">{order.name}</td>
                         <td className="text-center">{order.maxBidPrice}</td>
                         <td className="text-center">{order.dataPackageType}</td>
-                        <td className="text-center">
-                          <ul className="list-inline m-0">
+                        <td className="text-center text-nowrap">
+                          <ul className="list-inline m-0 ">
                             {/* <li className="list-inline-item">
                            <button
                              className="btn btn-primary btn-sm"
@@ -129,7 +129,7 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 });
 
