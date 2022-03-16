@@ -1,54 +1,25 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./Items.css";
-// import { Navigate } from "react-router-dom";
-import { addToCart } from "../../../features/CartSlice";
-import { useGetAllProductsQuery } from "../../../services/ItemsApi";
+import React from "react";
+import BuyerOrderTable from "./ItemsOrderTable";
+import BuyerOrderForm from "./ItemsOrderForm";
 
-const Products = () => {
-  const { items: products, status } = useSelector((state) => state.items);
-  const dispatch = useDispatch();
+const Buyer = () => {
+  const [buyOrder, setBuyOrder] = React.useState([]);
 
-  const { data, isLoading } = useGetAllProductsQuery();
-  console.log("Api", isLoading);
-
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
-    // <Navigate to="/cart" />;
+  const handleEdit = (order) => {
+    setBuyOrder(order);
   };
-
   return (
-    <div className="home-container">
-      {status === "success" ? (
-        <>
-          <h2 className="text-center">New Arrivals</h2>
-          <div className="row">
-            {data &&
-              data?.map((item) => (
-                <div className="col-12 col-sm-12 col-lg-3">
-                  <div className="products">
-                    <div key={item.id} className="product">
-                      <h3>{item.title}</h3>
-
-                      <div className="details">
-                        <span>{item.author}</span>
-                        <span className="price">${item.price}</span>
-                      </div>
-                      <button onClick={() => handleAddToCart(item)}>
-                        Add To Cart
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </>
-      ) : status === "pending" ? (
-        <p>Loading...</p>
-      ) : (
-        <p>Unexpected error occured...</p>
-      )}
+    <div className="container mt-4 p-0">
+      <div className="row p-0">
+        <div className="col-12 col-md-12 col-lg-9">
+          <BuyerOrderTable onEdit={handleEdit} />
+        </div>
+        <div className="col-12 col-md-12 col-lg-3">
+          <BuyerOrderForm order={buyOrder} />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Products;
+export default Buyer;

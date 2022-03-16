@@ -43,10 +43,10 @@ router.post("/", async (req, res) => {
 });
 
 router.patch("/:id", async (req, res) => {
-  const { name, desc, categories, price, date_added } = req.body;
+  const { name, desc, category, price, date_added } = req.body;
 
   try {
-    let item = await Items.findById(req.params.id);
+    let item = await Items.findByIdAndUpdate(req.params.id);
 
     if (!item) {
       res.statusCode(404);
@@ -54,9 +54,9 @@ router.patch("/:id", async (req, res) => {
     // update Object
     item.name = name;
     item.desc = desc;
-    item.categories = categories || item.categories;
+    item.category = category || item.category;
     item.price = price || item.price;
-    date_added = date_added || item.date_added;
+    item.date_added = date_added || item.date_added;
 
     const updatedItem = await Items.save();
     return res.json(updatedItem);

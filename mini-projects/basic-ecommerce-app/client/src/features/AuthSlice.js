@@ -8,7 +8,7 @@ const initialState = {
 };
 
 // Login user
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => { 
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
     return await authService.login(user);
   } catch (error) {
@@ -23,8 +23,7 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-  },
+  reducers: {},
 });
 
 export const { reset } = authSlice.actions;

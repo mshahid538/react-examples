@@ -3,7 +3,6 @@ import axios from "axios";
 
 const initialState = {
   items: [],
-  status: null,
 };
 
 export const ItemsFetch = createAsyncThunk("items/itemsFetch", async () => {
@@ -19,18 +18,6 @@ const ItemsSlice = createSlice({
   name: "items",
   initialState,
   reducers: {},
-  extraReducers: {
-    [ItemsFetch.pending]: (state, action) => {
-      state.status = "pending";
-    },
-    [ItemsFetch.fulfilled]: (state, action) => {
-      state.items = action.payload;
-      state.status = "success";
-    },
-    [ItemsFetch.rejected]: (state, action) => {
-      state.status = "rejected";
-    },
-  },
 });
 
 export default ItemsSlice.reducer;

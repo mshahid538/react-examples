@@ -1,37 +1,52 @@
 import React from "react";
-import { DATA_PACKAGE_TYPE } from "../../../constants";
 import {
   createBuyOrder,
   updateBuyOrder,
 } from "../../../services/BuyerOrderService";
+import { Catagory_type } from "./ItemsOrderTable";
 
 const BuyerOrderForm = ({ order }) => {
+  const [isValidated, setIsValidated] = React.useState(true);
   const [name, setName] = React.useState("");
-  const [maxBidPrice, setMaxBidPrice] = React.useState(0);
-  const [dataType, setDataType] = React.useState("");
+  const [price, setPrice] = React.useState(0);
+  const [catagory, setCatagory] = React.useState("");
+  const [desc, setDesc] = React.useState("");
+  const [date_added, setDate_Added] = React.useState("");
 
   React.useEffect(() => {
     setName(order?.name);
-    setMaxBidPrice(order?.maxBidPrice);
-    setDataType(order?.dataPackageType);
+    setPrice(order?.price);
+    setCatagory(order?.catagory);
+    setDesc(order?.desc);
+    setDate_Added(order?.date_added);
   }, [order]);
-
-  const [isValidated, setIsValidated] = React.useState(true);
 
   const handleChange = (e) => {
     if (e.target.name === "name") {
       setName(e.target.value);
     }
-    if (e.target.name === "maxBidPrice") {
-      setMaxBidPrice(e.target.value);
+    if (e.target.name === "price") {
+      setPrice(e.target.value);
     }
-    if (e.target.name === "dataPackageType") {
-      setDataType(e.target.value);
+    if (e.target.name === "catagory") {
+      setCatagory(e.target.value);
+    }
+    if (e.target.name === "desc") {
+      setDesc(e.target.value);
+    }
+    if (e.target.name === "date_added") {
+      setDate_Added(e.target.value);
     }
   };
 
   const handleSubmit = async () => {
-    if (name === "" || maxBidPrice === 0 || dataType === "") {
+    if (
+      name === "" ||
+      price === 0 ||
+      catagory === "" ||
+      desc === "" ||
+      date_added === ""
+    ) {
       setIsValidated(false);
       return;
     }
@@ -39,11 +54,24 @@ const BuyerOrderForm = ({ order }) => {
     !isValidated && setIsValidated(true);
 
     if (order) {
-      await updateBuyOrder({ id: order._id, name, maxBidPrice, dataType });
+      await updateBuyOrder({
+        id: order._id,
+        name,
+        price,
+        catagory,
+        desc,
+        date_added,
+      });
       return;
     }
 
-    const response = await createBuyOrder({ name, maxBidPrice, dataType });
+    const response = await createBuyOrder({
+      name,
+      price,
+      catagory,
+      desc,
+      date_added,
+    });
 
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
@@ -68,27 +96,29 @@ const BuyerOrderForm = ({ order }) => {
           />
         </div>
         <div className="form-group my-3">
-          <label for="name">Max Bid Price*</label>
+          <label for="name">Price*</label>
           <input
+            value={price}
             type="number"
             className="form-control"
-            placeholder="max bid price"
+            placeholder="price"
             onChange={handleChange}
-            name="maxBidPrice"
+            name="price"
             required
             error={!isValidated}
           />
         </div>
+
         <div className="form-group my-3">
-          <label>Data Package Type*</label>
+          <label>Catagory*</label>
           <select
             className="form-control"
-            value={dataType}
             onChange={handleChange}
-            name="dataPackageType"
+            name="catagory"
             error={!isValidated}
+            value={catagory}
           >
-            {Object.entries(DATA_PACKAGE_TYPE).map(([key, value]) => (
+            {Object.entries(Catagory_type).map(([key, value]) => (
               <option key={key} value={value}>
                 {value}
               </option>
@@ -96,9 +126,36 @@ const BuyerOrderForm = ({ order }) => {
           </select>
         </div>
 
+        <div className="form-group my-3">
+          <label for="name">Description*</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="description"
+            onChange={handleChange}
+            name="desc"
+            value={desc}
+            required
+            error={!isValidated}
+          />
+        </div>
+        <div className="form-group my-3">
+          <label for="name">Date Added*</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="date added"
+            onChange={handleChange}
+            name="date_added"
+            value={date_added}
+            required
+            error={!isValidated}
+          />
+        </div>
+
         <div className="form-group mb-2">
           <div className="d-flex justify-content-around ">
-            {!order ? (
+            {order && order.name ? (
               <div>
                 <button
                   type="submit"
