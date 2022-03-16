@@ -1,0 +1,38 @@
+//////////////////////// Books Document ////////////////////
+
+[
+{
+  "isbn": 1234,
+  "title": "I love coding",
+  "author": "John Doe",
+  "price": "14.99€"
+}, 
+{
+  "isbn": 12345,
+  "title": "ReactJS",
+  "author": "Sarmad",
+  "price": "30€"
+},
+{
+  "isbn": 123456,
+  "title": "NodeJS",
+  "author": "Sarmad Zia",
+  "price": "19.99€"
+},
+{
+  "isbn": 1234567,
+  "title": "Docker Container",
+  "author": "Dillon Funk",
+  "price": "78.54€"
+}
+]
+
+/////////////////////// User Document Sample ///////////////////
+
+
+{  
+        "username": "sarmad2",
+        "password": "123456",
+        "fullname": "Sarmad Zia",
+        "email": "sarmad@gmail.com",
+}

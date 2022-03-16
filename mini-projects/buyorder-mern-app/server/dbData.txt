@@ -1,0 +1,10 @@
+//////////////////////// Buy Orders Document ////////////////////
+
+[
+{
+  "isbn": 1234,
+  "title": "I love coding",
+  "author": "John Doe",
+  "price": "14.99€"
+}, 
+]
