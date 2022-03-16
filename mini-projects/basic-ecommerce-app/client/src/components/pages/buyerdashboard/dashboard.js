@@ -21,10 +21,6 @@ const Items = () => {
     ItemsFetch();
   }, []);
 
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
-  };
-
   return (
     <div className="row mt-3">
       {itemData.map((item) => (
@@ -45,7 +41,10 @@ const Items = () => {
                   <div>{item.category}</div>
                 </div>
                 <div>
-                  <button class="btn btn-primary" onClick={handleAddToCart}>
+                  <button
+                    class="btn btn-primary"
+                    onClick={() => dispatch(addToCart(item))}
+                  >
                     Add to Cart
                   </button>
                 </div>

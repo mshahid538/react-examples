@@ -6,6 +6,7 @@ const Buyer = () => {
   const [buyOrder, setBuyOrder] = React.useState([]);
 
   const handleEdit = (order) => {
+    console.log(order, "sadsads");
     setBuyOrder(order);
   };
   return (

@@ -3,22 +3,22 @@ import {
   createBuyOrder,
   updateBuyOrder,
 } from "../../../services/BuyerOrderService";
-import { Catagory_type } from "./ItemsOrderTable";
+import { Category_type } from "./ItemsOrderTable";
 
 const BuyerOrderForm = ({ order }) => {
   const [isValidated, setIsValidated] = React.useState(true);
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState(0);
-  const [catagory, setCatagory] = React.useState("");
+  const [category, setCategory] = React.useState("");
   const [desc, setDesc] = React.useState("");
-  const [date_added, setDate_Added] = React.useState("");
+  const [dateAdded, setDateAdded] = React.useState("");
 
   React.useEffect(() => {
     setName(order?.name);
     setPrice(order?.price);
-    setCatagory(order?.catagory);
+    setCategory(order?.category);
     setDesc(order?.desc);
-    setDate_Added(order?.date_added);
+    setDateAdded(order?.dateAdded);
   }, [order]);
 
   const handleChange = (e) => {
@@ -28,14 +28,14 @@ const BuyerOrderForm = ({ order }) => {
     if (e.target.name === "price") {
       setPrice(e.target.value);
     }
-    if (e.target.name === "catagory") {
-      setCatagory(e.target.value);
+    if (e.target.name === "category") {
+      setCategory(e.target.value);
     }
     if (e.target.name === "desc") {
       setDesc(e.target.value);
     }
-    if (e.target.name === "date_added") {
-      setDate_Added(e.target.value);
+    if (e.target.name === "dateAdded") {
+      setDateAdded(e.target.value);
     }
   };
 
@@ -43,9 +43,9 @@ const BuyerOrderForm = ({ order }) => {
     if (
       name === "" ||
       price === 0 ||
-      catagory === "" ||
+      category === "" ||
       desc === "" ||
-      date_added === ""
+      dateAdded === ""
     ) {
       setIsValidated(false);
       return;
@@ -53,14 +53,16 @@ const BuyerOrderForm = ({ order }) => {
 
     !isValidated && setIsValidated(true);
 
+    console.log(order, "sadsad");
+
     if (order) {
       await updateBuyOrder({
         id: order._id,
         name,
         price,
-        catagory,
+        category,
         desc,
-        date_added,
+        dateAdded,
       });
       return;
     }
@@ -68,11 +70,11 @@ const BuyerOrderForm = ({ order }) => {
     const response = await createBuyOrder({
       name,
       price,
-      catagory,
+      category,
       desc,
-      date_added,
+      dateAdded,
     });
-
+    console.log(response + "create response.....................");
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
       return;
@@ -114,11 +116,11 @@ const BuyerOrderForm = ({ order }) => {
           <select
             className="form-control"
             onChange={handleChange}
-            name="catagory"
+            name="category"
             error={!isValidated}
-            value={catagory}
+            value={category}
           >
-            {Object.entries(Catagory_type).map(([key, value]) => (
+            {Object.entries(Category_type).map(([key, value]) => (
               <option key={key} value={value}>
                 {value}
               </option>
@@ -146,8 +148,8 @@ const BuyerOrderForm = ({ order }) => {
             className="form-control"
             placeholder="date added"
             onChange={handleChange}
-            name="date_added"
-            value={date_added}
+            name="dateAdded"
+            value={dateAdded}
             required
             error={!isValidated}
           />

@@ -9,15 +9,16 @@ export const createBuyOrder = async ({
   name,
   price,
   desc,
-  catagory,
-  date_added,
+  category,
+  dateAdded,
 }) => {
+  console.log(name, price, desc, category, dateAdded, "asdadsadsad");
   return await axios.post(API_ITEMS_URL, {
     name,
     price,
     desc,
-    catagory,
-    date_added,
+    category,
+    dateAdded,
   });
 };
 
@@ -26,16 +27,16 @@ export const updateBuyOrder = async ({
   name,
   price,
   desc,
-  catagory,
-  date_added,
+  category,
+  dateAdded,
 }) => {
-  return await axios.patch(`${API_ITEMS_URL}/${id}`, {
+  return await axios.put(`${API_ITEMS_URL}/${id}`, {
     id,
     name,
     price,
     desc,
-    catagory,
-    date_added,
+    category,
+    dateAdded,
   });
 };
 

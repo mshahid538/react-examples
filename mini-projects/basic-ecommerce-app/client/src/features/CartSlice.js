@@ -72,6 +72,7 @@ const cartSlice = createSlice({
         (cartTotal, cartItem) => {
           // debugger;
           const { price, cartQuantity } = cartItem;
+          console.log(price, "item total....................");
 
           const itemTotal = price * cartQuantity;
           console.log(itemTotal, "item total....................");
@@ -87,6 +88,7 @@ const cartSlice = createSlice({
       );
       total = parseInt(total.toFixed(2));
       state.cartTotalQuantity = quantity;
+      console.log(state.cartTotalQuantity);
 
       state.cartTotalAmount = total;
     },

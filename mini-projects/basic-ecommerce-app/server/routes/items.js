@@ -26,12 +26,13 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log(req, "sadadsad");
   const item = new Items({
     name: req.body.name,
     desc: req.body.desc,
     category: req.body.category,
     price: req.body.price,
-    date_added: req.body.date_added,
+    dateAdded: req.body.dateAdded,
   });
 
   try {
@@ -42,26 +43,18 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
-  const { name, desc, category, price, date_added } = req.body;
-
+router.put("/:id", async (req, res) => {
   try {
-    let item = await Items.findByIdAndUpdate(req.params.id);
-
-    if (!item) {
-      res.statusCode(404);
-    }
-    // update Object
-    item.name = name;
-    item.desc = desc;
-    item.category = category || item.category;
-    item.price = price || item.price;
-    item.date_added = date_added || item.date_added;
-
-    const updatedItem = await Items.save();
-    return res.json(updatedItem);
+    const item = await Items.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(item);
   } catch (err) {
-    res.status(500).json({ error: err });
+    res.status(500).json(err);
   }
 });
 

@@ -5,7 +5,7 @@ import {
   deleteBuyOrder,
 } from "../../../services/BuyerOrderService";
 
-export const Catagory_type = {
+export const Category_type = {
   LATITUDE: "Latitude",
   DELL: "Dell",
   HP: "Hp",
@@ -29,6 +29,7 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
   };
 
   const handleEdit = (order) => {
+    console.log(order, "oderrrrrrr");
     onEdit(order);
   };
 
@@ -49,7 +50,7 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
                       Price
                     </th>
                     <th scope="col" className="text-center text-nowrap">
-                      Catagory
+                      Category
                     </th>
                     <th scope="col" className="text-center text-nowrap">
                       Description
@@ -67,9 +68,9 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
                     <tr key={order._id}>
                       <td className="text-center">{order.name}</td>
                       <td className="text-center">{order.price}</td>
-                      <td className="text-center">{order.catagory}</td>
+                      <td className="text-center">{order.category}</td>
                       <td className="text-center">{order.desc}</td>
-                      <td className="text-center">{order.date_added}</td>
+                      <td className="text-center">{order.dateAdded}</td>
 
                       <td className="text-center text-nowrap">
                         <ul className="list-inline m-0 ">
