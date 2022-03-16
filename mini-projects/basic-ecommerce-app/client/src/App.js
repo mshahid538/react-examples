@@ -6,7 +6,7 @@ import Login from "./components/auth/Login";
 import Items from "./components/pages/items/Items";
 import Dashboard from "./components/pages/buyerdashboard/dashboard";
 import Cart from "./components/pages/cart/Cart";
-import PrivateRoute from "./routes/PrivateRoute";
+// import PrivateRoute from "./routes/PrivateRoute";
 import { useSelector } from "react-redux";
 
 import "./App.css";
@@ -30,7 +30,8 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
 
-            <Route element={<PrivateRoute auth={authenticated} />}>
+            {/* <Route element={<PrivateRoute auth={authenticated} />}> */}
+            <Route>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/items" element={<Items />} />
