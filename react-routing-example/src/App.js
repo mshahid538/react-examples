@@ -1,8 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
-import { useState } from "react";
-
 import About from "./components/About";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
@@ -19,7 +16,6 @@ function App() {
       <button onClick={() => setIsLogged(false)}> Logout</button>
       <Router>
         <Routes>
-
           {/* Public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
