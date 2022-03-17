@@ -1,22 +1,25 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
 import {
   getBuyOrdersDB,
   deleteBuyOrder,
 } from "../../../services/BuyerOrderService";
+import { addToCart } from "../../../features/CartSlice";
+import { toast } from "react-toastify";
 
-export const Category_type = {
+export const CATEGORY_TYPE = {
   LATITUDE: "Latitude",
   DELL: "Dell",
   HP: "Hp",
 };
 
-const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
+const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
   const [buyOrders, setBuyOrders] = React.useState([]);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     getBuyOrders();
-  }, []);
+  }, [buyOrders, order]);
 
   const getBuyOrders = async () => {
     const res = await getBuyOrdersDB();
@@ -25,22 +28,21 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
 
   const handleDelete = async (id) => {
     await deleteBuyOrder(id);
+    toast.error("Deleted item");
     getBuyOrders();
   };
 
   const handleEdit = (order) => {
-    console.log(order, "oderrrrrrr");
     onEdit(order);
   };
 
   return (
-    // <div className="container">
     <div className="row">
       <div className="col-lg-11 col-xl-12 mx-auto">
         <div className="card border shadow">
           <div className="card-body p-0">
             <div className="table-responsive">
-              <table className="table ">
+              <table className="table table-bordered">
                 <thead>
                   <tr>
                     <th scope="col" className="text-center text-nowrap ">
@@ -66,10 +68,10 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
                 <tbody>
                   {buyOrders.map((order) => (
                     <tr key={order._id}>
-                      <td className="text-center">{order.name}</td>
+                      <td className="text-center text-nowrap">{order.name}</td>
                       <td className="text-center">{order.price}</td>
                       <td className="text-center">{order.category}</td>
-                      <td className="text-center">{order.desc}</td>
+                      <td className="text-center text-nowrap">{order.desc}</td>
                       <td className="text-center">{order.dateAdded}</td>
 
                       <td className="text-center text-nowrap">
@@ -98,18 +100,18 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
                               <i className="bi bi-trash"></i>
                             </button>
                           </li>
-                          {/* <li className="list-inline-item">
+                          <li className="list-inline-item">
                             <button
                               className="btn btn-info btn-sm "
                               type="button"
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Add to cart"
-                              onClick={() => handleDelete(order._id)}
+                              onClick={() => dispatch(addToCart(order))}
                             >
                               <i className="bi bi-cart"></i>
                             </button>
-                          </li> */}
+                          </li>
                         </ul>
                       </td>
                     </tr>
@@ -121,8 +123,7 @@ const BuyerOrderTable = React.memo(function BuyOrderTable({ onEdit }) {
         </div>
       </div>
     </div>
-    // </div>
   );
 });
 
-export default BuyerOrderTable;
+export default ItemsOrderTable;

@@ -3,9 +3,10 @@ import {
   createBuyOrder,
   updateBuyOrder,
 } from "../../../services/BuyerOrderService";
-import { Category_type } from "./ItemsOrderTable";
+import { CATEGORY_TYPE } from "./ItemsOrderTable";
+import { toast } from "react-toastify";
 
-const BuyerOrderForm = ({ order }) => {
+const ItemsOrderForm = ({ order }) => {
   const [isValidated, setIsValidated] = React.useState(true);
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState(0);
@@ -39,7 +40,7 @@ const BuyerOrderForm = ({ order }) => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleCreateOrder = async () => {
     if (
       name === "" ||
       price === 0 ||
@@ -50,11 +51,22 @@ const BuyerOrderForm = ({ order }) => {
       setIsValidated(false);
       return;
     }
-
+    const response = await createBuyOrder({
+      name,
+      price,
+      category,
+      desc,
+      dateAdded,
+    });
+    if (response?.status !== 200) {
+      console.log(`Error: ${response.status} : ${response.statusText}`);
+      return;
+    }
+    toast.info("Item added");
     !isValidated && setIsValidated(true);
+  };
 
-    console.log(order, "sadsad");
-
+  const handleUpdateOrder = async () => {
     if (order) {
       await updateBuyOrder({
         id: order._id,
@@ -64,19 +76,7 @@ const BuyerOrderForm = ({ order }) => {
         desc,
         dateAdded,
       });
-      return;
-    }
-
-    const response = await createBuyOrder({
-      name,
-      price,
-      category,
-      desc,
-      dateAdded,
-    });
-    console.log(response + "create response.....................");
-    if (response?.status !== 200) {
-      console.log(`Error: ${response.status} : ${response.statusText}`);
+      toast.info("Item Updated");
       return;
     }
   };
@@ -85,7 +85,7 @@ const BuyerOrderForm = ({ order }) => {
       <h6 className="text-center">Buyer Order Form</h6>
       <div className="mt-2">
         <div className="form-group my-3">
-          <label for="name">Name</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             className="form-control"
@@ -97,39 +97,44 @@ const BuyerOrderForm = ({ order }) => {
             required
           />
         </div>
-        <div className="form-group my-3">
-          <label for="name">Price*</label>
-          <input
-            value={price}
-            type="number"
-            className="form-control"
-            placeholder="price"
-            onChange={handleChange}
-            name="price"
-            required
-            error={!isValidated}
-          />
+        <div class="row">
+          <div class="col">
+            <div className="form-group">
+              <label htmlFor="name">Price*</label>
+              <input
+                value={price}
+                type="number"
+                className="form-control"
+                placeholder="price"
+                onChange={handleChange}
+                name="price"
+                required
+                error={!isValidated}
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div className="form-group">
+              <label htmlFor="category">Catagory*</label>
+              <select
+                className="form-control"
+                onChange={handleChange}
+                name="category"
+                value={category}
+                error={!isValidated}
+              >
+                {Object.entries(CATEGORY_TYPE).map(([key, value]) => (
+                  <option key={key} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
 
         <div className="form-group my-3">
-          <label>Catagory*</label>
-          <select
-            className="form-control"
-            onChange={handleChange}
-            name="category"
-            error={!isValidated}
-            value={category}
-          >
-            {Object.entries(Category_type).map(([key, value]) => (
-              <option key={key} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="form-group my-3">
-          <label for="name">Description*</label>
+          <label htmlFor="name">Description*</label>
           <input
             type="text"
             className="form-control"
@@ -142,11 +147,11 @@ const BuyerOrderForm = ({ order }) => {
           />
         </div>
         <div className="form-group my-3">
-          <label for="name">Date Added*</label>
+          <label htmlFor="dateAdded">Date Added*</label>
           <input
             type="text"
             className="form-control"
-            placeholder="date added"
+            placeholder="dd/mm/yyyy"
             onChange={handleChange}
             name="dateAdded"
             value={dateAdded}
@@ -162,7 +167,7 @@ const BuyerOrderForm = ({ order }) => {
                 <button
                   type="submit"
                   className="btn btn-outline-primary"
-                  onClick={handleSubmit}
+                  onClick={handleUpdateOrder}
                 >
                   Update
                 </button>
@@ -172,7 +177,7 @@ const BuyerOrderForm = ({ order }) => {
                 <button
                   type="submit"
                   className="btn btn-outline-primary"
-                  onClick={handleSubmit}
+                  onClick={handleCreateOrder}
                 >
                   Create
                 </button>
@@ -185,4 +190,4 @@ const BuyerOrderForm = ({ order }) => {
   );
 };
 
-export default BuyerOrderForm;
+export default ItemsOrderForm;

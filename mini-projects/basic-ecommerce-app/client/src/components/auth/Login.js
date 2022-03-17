@@ -27,9 +27,7 @@ const Login = () => {
       name,
       password,
     };
-
     const user = dispatch(login(userData));
-
     if (!!user) {
       navigate("/dashboard");
     }

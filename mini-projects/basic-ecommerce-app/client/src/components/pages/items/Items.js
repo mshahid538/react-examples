@@ -1,26 +1,23 @@
 import React from "react";
-import BuyerOrderTable from "./ItemsOrderTable";
-import BuyerOrderForm from "./ItemsOrderForm";
+import ItemsOrderTable from "./ItemsOrderTable";
+import ItemsOrderForm from "./ItemsOrderForm";
 
-const Buyer = () => {
+const Items = () => {
   const [buyOrder, setBuyOrder] = React.useState([]);
 
   const handleEdit = (order) => {
-    console.log(order, "sadsads");
     setBuyOrder(order);
   };
   return (
-    <div className="container mt-4 p-0">
-      <div className="row p-0">
-        <div className="col-12 col-md-12 col-lg-9">
-          <BuyerOrderTable onEdit={handleEdit} />
-        </div>
-        <div className="col-12 col-md-12 col-lg-3">
-          <BuyerOrderForm order={buyOrder} />
-        </div>
+    <div className="row mt-4">
+      <div className="col-12 col-md-12 col-lg-9 py-2">
+        <ItemsOrderTable onEdit={handleEdit} />
+      </div>
+      <div className="col-12 col-md-12 col-lg-3 py-2">
+        <ItemsOrderForm order={buyOrder} />
       </div>
     </div>
   );
 };
 
-export default Buyer;
+export default Items;

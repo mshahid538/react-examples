@@ -6,8 +6,10 @@ import Login from "./components/auth/Login";
 import Items from "./components/pages/items/Items";
 import Dashboard from "./components/pages/buyerdashboard/dashboard";
 import Cart from "./components/pages/cart/Cart";
+import Checkout from "./components/pages/checkout/Checkout";
+
 // import PrivateRoute from "./routes/PrivateRoute";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import "./App.css";
 
@@ -31,44 +33,16 @@ function App() {
             <Route path="/login" element={<Login />} />
 
             {/* <Route element={<PrivateRoute auth={authenticated} />}> */}
-            <Route>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/items" element={<Items />} />
-            </Route>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/items" element={<Items />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
       </Router>
-      <ToastContainer />
+      <ToastContainer autoClose={1500} />
     </>
   );
 }
 
 export default App;
-
-{
-  /* <Route
-              path="/items"
-              element={
-                <PrivateRoute>
-                  <Items />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/cart"
-              element={
-                <PrivateRoute>
-                  <Cart />
-                </PrivateRoute>
-              }
-            /> */
-}

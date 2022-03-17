@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,15 +24,19 @@ const Cart = () => {
     console.log(cartItem, "cartItem.............................");
     dispatch(addToCart(cartItem));
   };
+
   const handleDecreaseCart = (cartItem) => {
     dispatch(decreaseCart(cartItem));
   };
+
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem));
   };
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
@@ -58,7 +62,6 @@ const Cart = () => {
             {cart.cartItems.map((cartItem) => (
               <div className="cart-item" key={cartItem.id}>
                 <div className="cart-product">
-                  {/* <img src={cartItem.image} alt={cartItem.name} /> */}
                   <div>
                     <h3>{cartItem.name}</h3>
                     <button onClick={() => handleRemoveFromCart(cartItem)}>
@@ -90,7 +93,11 @@ const Cart = () => {
                 <span className="amount">${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <button>Pay And Checkout</button>
+              <div className="continue-shopping">
+                <Link to="/checkout">
+                  <button>Pay And Checkout</button>
+                </Link>
+              </div>
               <div className="continue-shopping">
                 <Link to="/dashboard">
                   <i className="bi bi-arrow-left"></i>

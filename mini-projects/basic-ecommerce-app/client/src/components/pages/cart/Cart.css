@@ -1,6 +1,6 @@
 /* Cart */
 .cart-container {
-	padding: 2rem 4rem;
+	padding: 2rem 0.5rem;
   }
   .cart-container h2 {
 	font-weight: 400;
@@ -24,7 +24,7 @@
   }
   .cart-item {
 	border-top: 1px solid rgb(187, 187, 187);
-	padding: 1rem 0;
+	padding: 0.6rem 0;
   }
   .cart-container .titles .product-title {
 	padding-left: 0.5rem;

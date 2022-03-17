@@ -12,7 +12,6 @@ export const createBuyOrder = async ({
   category,
   dateAdded,
 }) => {
-  console.log(name, price, desc, category, dateAdded, "asdadsadsad");
   return await axios.post(API_ITEMS_URL, {
     name,
     price,
