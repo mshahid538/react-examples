@@ -8,7 +8,7 @@ import NotFound from "./components/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(null);
+  const [isLogged, setIsLogged] = useState(false);
 
   return (
     <>
