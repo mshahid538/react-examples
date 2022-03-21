@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import {
   getBuyOrdersDB,
   deleteBuyOrder,
 } from "../../../services/BuyerOrderService";
 import { addToCart } from "../../../features/CartSlice";
-import { toast } from "react-toastify";
 
 export const CATEGORY_TYPE = {
   LATITUDE: "Latitude",

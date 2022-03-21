@@ -1,38 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import "./dashboard.css";
-// import { Navigate } from "react-router-dom";
+import { getBuyOrdersDB } from "../../../services/BuyerOrderService";
 import { addToCart } from "../../../features/CartSlice";
 // import { ItemsFetch } from "../../../features/ItemsSlice";
+import "./dashboard.css";
 
 const Items = () => {
   const [itemData, setItemData] = React.useState([]);
   const dispatch = useDispatch();
   // const { item } = useSelector((state) => state.items);
 
-  useEffect(() => {
-    const ItemsFetch = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/items");
-        setItemData(response.data);
-      } catch (error) {}
-    };
-    ItemsFetch();
+  React.useEffect(() => {
+    getBuyOrders();
   }, [itemData]);
+
+  const getBuyOrders = async () => {
+    const res = await getBuyOrdersDB();
+    setItemData(res.data);
+  };
 
   return (
     <div className="row my-3">
       {itemData?.map((item) => (
-        <div className="col-12 col-sm-6 col-md-6 col-lg-3 py-2">
-          <div class="card">
-            <div class="card-body text-center">
+        <div className="col-12 col-sm-6 col-md-6 col-lg-3 py-2" key={item.name}>
+          <div className="card">
+            <div className="card-body text-center">
               <div className="d-flex justify-content-between">
                 <div className="">
-                  <h5 class="card-title">{item.name}</h5>
+                  <h5 className="card-title">{item.name}</h5>
                 </div>
                 <div className="">
-                  <h5 class="card-title">{item.price}</h5>
+                  <h5 className="card-title">{item.price}</h5>
                 </div>
               </div>
               <p className="">{item.desc}</p>
@@ -42,7 +40,7 @@ const Items = () => {
                 </div>
                 <div>
                   <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     onClick={() => dispatch(addToCart(item))}
                   >
                     Add to Cart

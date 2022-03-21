@@ -6,13 +6,11 @@ import {
   clearCart,
   decreaseCart,
   getTotals,
-  removeFromCart,
 } from "../../../features/CartSlice";
 import "./Cart.css";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  console.log(cart, "cart...................");
 
   const dispatch = useDispatch();
 
@@ -21,16 +19,11 @@ const Cart = () => {
   }, [cart, dispatch]);
 
   const handleAddToCart = (cartItem) => {
-    console.log(cartItem, "cartItem.............................");
     dispatch(addToCart(cartItem));
   };
 
   const handleDecreaseCart = (cartItem) => {
     dispatch(decreaseCart(cartItem));
-  };
-
-  const handleRemoveFromCart = (cartItem) => {
-    dispatch(removeFromCart(cartItem));
   };
 
   const handleClearCart = () => {
@@ -64,9 +57,10 @@ const Cart = () => {
                 <div className="cart-product">
                   <div>
                     <h3>{cartItem.name}</h3>
-                    <button onClick={() => handleRemoveFromCart(cartItem)}>
-                      <i className="bi bi-trash text-danger">Remove Item</i>
-                    </button>
+                    <p>
+                      Description :{" "}
+                      <span className="text-info">{cartItem.desc}</span>
+                    </p>
                   </div>
                 </div>
                 <div className="cart-product-price">${cartItem.price}</div>

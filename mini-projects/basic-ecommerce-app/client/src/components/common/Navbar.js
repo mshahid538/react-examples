@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../../features/AuthSlice";
+import { logout } from "../../features/AuthSlice";
 import { getTotals } from "../../features/CartSlice";
 
 const Navbar = () => {
@@ -17,7 +17,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(reset());
     navigate("/login");
   };
 
@@ -37,7 +36,7 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
-            {user ? (
+            {!user ? (
               <div className="navbar-nav ml-auto">
                 <Link
                   to="/cart"

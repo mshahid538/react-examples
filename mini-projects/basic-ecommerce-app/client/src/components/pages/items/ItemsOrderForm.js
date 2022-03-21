@@ -1,10 +1,10 @@
 import React from "react";
+import { toast } from "react-toastify";
 import {
   createBuyOrder,
   updateBuyOrder,
 } from "../../../services/BuyerOrderService";
 import { CATEGORY_TYPE } from "./ItemsOrderTable";
-import { toast } from "react-toastify";
 
 const ItemsOrderForm = ({ order }) => {
   const [isValidated, setIsValidated] = React.useState(true);
@@ -97,8 +97,8 @@ const ItemsOrderForm = ({ order }) => {
             required
           />
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <div className="form-group">
               <label htmlFor="name">Price*</label>
               <input
@@ -113,7 +113,7 @@ const ItemsOrderForm = ({ order }) => {
               />
             </div>
           </div>
-          <div class="col">
+          <div className="col">
             <div className="form-group">
               <label htmlFor="category">Catagory*</label>
               <select
