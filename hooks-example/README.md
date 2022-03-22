@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Project Description
+    This project is about understanding of REACT Hooks with some common Hooks. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# What are Hooks?
+    Hooks allow us to "hook" into React features such as state and lifecycle methods. Hooks were added to React in version 16.8. Hooks allow function components to have access to state and other React features. Because of this, class components are generally no longer needed.
 
-## Available Scripts
+# Some Common Hooks: 
+    useState
+    useEffect
+    useRef
+    useMemo
+    useContext
+    useCallBack
+    useReducer  
 
-In the project directory, you can run:
+# useState(): hook used to manage the state.
+	5-usecases of useState hook:
+        State Management
+        Conditional Rendering
+        Counter
+        Toggle Flags
+        Fetch Data from API & Store Local State.
 
-### `npm start`
+# useEffect(): Effect Hook is used to handle side effects. 
+    By default always take effect / run after every render. By using this hook you tell react what to perform after rendering. componentDidMount, componentDidUpdate, and componentWillUnmount.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    Basically, two types of side effects reside in the React component:
+        1.	Effects Without Cleanup: Some of the most common examples of  effects that do not require clean-up are: Manual DOM Mutation, Network Requests, Logging. These operations do not prevent the screen from being changed by the browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+        2.	Effects With Cleanup: Some effects need cleanup after a DOM update happens. If there is an update that creates Subscription on every change you must Clean that subscription before returning from useEffect or componentDidMount(); so that you can avoid Memory Leaks.
 
-### `npm test`
+        6-useCases for useEffect Hooks:
+            Running once on mount: fetch API data
+            Running on state change: validating input field
+            Running on state change: live filtering
+            Running on state change: trigger any animation on new array value
+            Running on props change: update some list on fetched API data update
+            Running on props change: updating fetched API data to get some updated price
+    
+# useRef(): The useRef Hook allows you to persist values between renders.
+        It can be used to store a mutable value that does not cause a re-render when updated. It can be used to access a DOM element directly.
+    
+        useState() vs useRef(): useState will re-render the component but useRef() will not.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        Use Cases for useRef() hooks:
+            - If you want to count anything without re-render a component.
+            - Get html element focused.
+            - To access the DOM: <div ref={myRef} />
+            - A value to be used in setTimeout / setInterval without re-rendering the component.
+            - Track previous state values.
+            
+            It simply returns a plain JavaScript object with name as {current}. 
+            
+            const refObject = useRef(0)
+            console.log(refObject) //{ current: 0 }
+ 
+# useMemo(): It returns a memoized value. The primary purpose of this hook is "performance optimization". Use it sparingly to optimise the performance when needed. It accepts two arguments - "create" function (which should return a value to be memoized) and "dependency" array.
 
-### `npm run build`
+            useCase for useMemo():
+            Optimise expensive calculations (e.g. operations on data like sort, filter, changing format etc.) while rendering.
+# useCallback(): It returns a memoized function (or callback). It accepts two arguments - "function" and "dependency" array. It will return new i.e. re-created function only when one of the dependencies has changed, or else it will return the old i.e. memoized one.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+            useCases of useCallback():
+            Passing memoized functions to child components (that are optimized with React.memo or shouldComponentUpdate using shallow equal - Object.is) to avoid unnecessary rerender of child component due to functions passed as props.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
