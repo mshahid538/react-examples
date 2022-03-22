@@ -4,7 +4,7 @@ import Signin from "../signin/Signin";
 import Signup from "../signup/Signup";
 import Home from "../home/Home";
 import Dashboard from "../dashboard/Dashboard";
-import PrivateRoutes from "./PrivateRoutes";
+import PrivateRoute from "./PrivateRoute";
 
 export default function AppRoutes() {
   return (
@@ -13,7 +13,7 @@ export default function AppRoutes() {
       <Route path="/signin" element={<Signin />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/home" element={<Home />}></Route>
-      <Route element={<PrivateRoutes />}>
+      <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />}></Route>
       </Route>
     </Routes>
