@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/AuthSlice";
 import { getTotals } from "../../features/CartSlice";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 

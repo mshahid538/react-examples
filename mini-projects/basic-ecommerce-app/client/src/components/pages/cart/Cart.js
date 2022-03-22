@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,7 +14,7 @@ const Cart = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
