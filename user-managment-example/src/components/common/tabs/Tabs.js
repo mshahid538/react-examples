@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Link as RouterLink } from "react-router-dom";
 
-export default function CenteredTabs() {
+function CenteredTabs() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -22,3 +22,4 @@ export default function CenteredTabs() {
     </Box>
   );
 }
+export default CenteredTabs;

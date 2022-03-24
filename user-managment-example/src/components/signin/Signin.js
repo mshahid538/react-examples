@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import { Link as RouterLink } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -31,10 +31,9 @@ function Copyright(props) {
   );
 }
 
-export default function Signin() {
+function Signin() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
   };
 
   return (
@@ -105,3 +104,4 @@ export default function Signin() {
     </Container>
   );
 }
+export default Signin;

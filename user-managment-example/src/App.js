@@ -1,8 +1,8 @@
 import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppRoutes from "./components/routes/AppRoutes";
 import Tabs from "./components/common/tabs/Tabs";
 import { BrowserRouter as Router } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 

@@ -6,7 +6,7 @@ import Home from "../home/Home";
 import Dashboard from "../dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 
-export default function AppRoutes() {
+function AppRoutes() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />}></Route>
@@ -19,3 +19,4 @@ export default function AppRoutes() {
     </Routes>
   );
 }
+export default AppRoutes;
