@@ -1,21 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getBuyOrdersDB } from "../../../services/BuyerOrderService";
+import { getItems } from "../../../services/ItemService";
 import { addToCart } from "../../../features/CartSlice";
-// import { ItemsFetch } from "../../../features/ItemsSlice";
 import "./dashboard.css";
 
-const Items = () => {
-  const [itemData, setItemData] = React.useState([]);
+function Items() {
   const dispatch = useDispatch();
-  // const { item } = useSelector((state) => state.items);
+  const [itemData, setItemData] = React.useState([]);
 
   React.useEffect(() => {
-    getBuyOrders();
+    getItemsDb();
   }, [itemData]);
 
-  const getBuyOrders = async () => {
-    const res = await getBuyOrdersDB();
+  const getItemsDb = async () => {
+    const res = await getItems();
     setItemData(res.data);
   };
 
@@ -53,6 +51,6 @@ const Items = () => {
       ))}
     </div>
   );
-};
+}
 
 export default Items;

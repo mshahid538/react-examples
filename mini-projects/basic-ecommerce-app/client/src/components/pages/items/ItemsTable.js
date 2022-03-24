@@ -1,39 +1,30 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  getBuyOrdersDB,
-  deleteBuyOrder,
-} from "../../../services/BuyerOrderService";
+import { getItems, deleteItem } from "../../../services/ItemService";
 import { addToCart } from "../../../features/CartSlice";
 
-export const CATEGORY_TYPE = {
-  LATITUDE: "Latitude",
-  DELL: "Dell",
-  HP: "Hp",
-};
-
-const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
-  const [buyOrders, setBuyOrders] = React.useState([]);
+function ItemsTable({ onEdit, item }) {
+  const [tableItems, setTableItems] = React.useState([]);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    getBuyOrders();
-  }, [buyOrders, order]);
+    getItemsDB();
+  }, [tableItems, item]);
 
-  const getBuyOrders = async () => {
-    const res = await getBuyOrdersDB();
-    setBuyOrders(res.data);
+  const getItemsDB = async () => {
+    const res = await getItems();
+    setTableItems(res.data);
   };
 
   const handleDelete = async (id) => {
-    await deleteBuyOrder(id);
+    await deleteItem(id);
     toast.error("Deleted item");
-    getBuyOrders();
+    getItemsDB();
   };
 
-  const handleEdit = (order) => {
-    onEdit(order);
+  const handleEdit = (item) => {
+    onEdit(item);
   };
 
   return (
@@ -66,13 +57,13 @@ const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {buyOrders.map((order) => (
-                    <tr key={order._id}>
-                      <td className="text-center text-nowrap">{order.name}</td>
-                      <td className="text-center">{order.price}</td>
-                      <td className="text-center">{order.category}</td>
-                      <td className="text-center text-nowrap">{order.desc}</td>
-                      <td className="text-center">{order.dateAdded}</td>
+                  {tableItems.map((item) => (
+                    <tr key={item._id}>
+                      <td className="text-center text-nowrap">{item.name}</td>
+                      <td className="text-center">{item.price}</td>
+                      <td className="text-center">{item.category}</td>
+                      <td className="text-center text-nowrap">{item.desc}</td>
+                      <td className="text-center">{item.dateAdded}</td>
 
                       <td className="text-center text-nowrap">
                         <ul className="list-inline m-0 ">
@@ -83,7 +74,7 @@ const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Edit"
-                              onClick={() => handleEdit(order)}
+                              onClick={() => handleEdit(item)}
                             >
                               <i className="bi bi-pencil"></i>
                             </button>
@@ -95,7 +86,7 @@ const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Delete"
-                              onClick={() => handleDelete(order._id)}
+                              onClick={() => handleDelete(item._id)}
                             >
                               <i className="bi bi-trash"></i>
                             </button>
@@ -107,7 +98,7 @@ const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Add to cart"
-                              onClick={() => dispatch(addToCart(order))}
+                              onClick={() => dispatch(addToCart(item))}
                             >
                               <i className="bi bi-cart"></i>
                             </button>
@@ -124,6 +115,6 @@ const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
       </div>
     </div>
   );
-});
+}
 
-export default ItemsOrderTable;
+export default ItemsTable;

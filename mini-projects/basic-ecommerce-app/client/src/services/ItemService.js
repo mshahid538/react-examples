@@ -1,11 +1,11 @@
 import axios from "axios";
 import { API_ITEMS_URL } from "../constants";
 
-export const getBuyOrdersDB = async () => {
+export const getItems = async () => {
   return await axios.get(API_ITEMS_URL);
 };
 
-export const createBuyOrder = async ({
+export const createItem = async ({
   name,
   price,
   desc,
@@ -21,7 +21,7 @@ export const createBuyOrder = async ({
   });
 };
 
-export const updateBuyOrder = async ({
+export const updateItem = async ({
   id,
   name,
   price,
@@ -39,6 +39,6 @@ export const updateBuyOrder = async ({
   });
 };
 
-export const deleteBuyOrder = async (id) => {
+export const deleteItem = async (id) => {
   return await axios.delete(`${API_ITEMS_URL}/${id}`);
 };

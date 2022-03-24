@@ -1,26 +1,23 @@
 import React from "react";
 import { toast } from "react-toastify";
-import {
-  createBuyOrder,
-  updateBuyOrder,
-} from "../../../services/BuyerOrderService";
-import { CATEGORY_TYPE } from "./ItemsOrderTable";
+import { createItem, updateItem } from "../../../services/ItemService";
+import { CATEGORY_TYPE } from "../../../constants";
 
-const ItemsOrderForm = ({ order }) => {
-  const [isValidated, setIsValidated] = React.useState(true);
+function ItemsOrderForm({ item }) {
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState(0);
   const [category, setCategory] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [dateAdded, setDateAdded] = React.useState("");
+  const [isValidated, setIsValidated] = React.useState(true);
 
   React.useEffect(() => {
-    setName(order?.name);
-    setPrice(order?.price);
-    setCategory(order?.category);
-    setDesc(order?.desc);
-    setDateAdded(order?.dateAdded);
-  }, [order]);
+    setName(item?.name);
+    setPrice(item?.price);
+    setCategory(item?.category);
+    setDesc(item?.desc);
+    setDateAdded(item?.dateAdded);
+  }, [item]);
 
   const handleChange = (e) => {
     if (e.target.name === "name") {
@@ -40,18 +37,19 @@ const ItemsOrderForm = ({ order }) => {
     }
   };
 
+  const isValidation =
+    name === "" ||
+    price === 0 ||
+    category === "" ||
+    desc === "" ||
+    dateAdded === "";
+
   const handleCreateOrder = async () => {
-    if (
-      name === "" ||
-      price === 0 ||
-      category === "" ||
-      desc === "" ||
-      dateAdded === ""
-    ) {
+    if (isValidation) {
       setIsValidated(false);
       return;
     }
-    const response = await createBuyOrder({
+    const response = await createItem({
       name,
       price,
       category,
@@ -66,10 +64,10 @@ const ItemsOrderForm = ({ order }) => {
     !isValidated && setIsValidated(true);
   };
 
-  const handleUpdateOrder = async () => {
-    if (order) {
-      await updateBuyOrder({
-        id: order._id,
+  const handleUpdateItem = async () => {
+    if (item) {
+      await updateItem({
+        id: item._id,
         name,
         price,
         category,
@@ -162,12 +160,12 @@ const ItemsOrderForm = ({ order }) => {
 
         <div className="form-group mb-2">
           <div className="d-flex justify-content-around ">
-            {order && order.name ? (
+            {item && item.name ? (
               <div>
                 <button
                   type="submit"
                   className="btn btn-outline-primary"
-                  onClick={handleUpdateOrder}
+                  onClick={handleUpdateItem}
                 >
                   Update
                 </button>
@@ -188,6 +186,6 @@ const ItemsOrderForm = ({ order }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ItemsOrderForm;

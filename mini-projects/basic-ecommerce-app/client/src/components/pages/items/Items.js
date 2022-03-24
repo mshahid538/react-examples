@@ -1,24 +1,24 @@
 import React from "react";
-import ItemsOrderTable from "./ItemsOrderTable";
-import ItemsOrderForm from "./ItemsOrderForm";
+import ItemsTable from "./ItemsTable";
+import ItemsForm from "./ItemsForm";
 
-const Items = () => {
-  const [buyOrder, setBuyOrder] = React.useState([]);
+function Items() {
+  const [item, SetItem] = React.useState([]);
 
-  const handleEdit = (order) => {
-    setBuyOrder(order);
+  const handleEdit = (item) => {
+    SetItem(item);
   };
 
   return (
     <div className="row mt-4">
       <div className="col-12 col-md-12 col-lg-9 py-2">
-        <ItemsOrderTable onEdit={handleEdit} />
+        <ItemsTable onEdit={handleEdit} />
       </div>
       <div className="col-12 col-md-12 col-lg-3 py-2">
-        <ItemsOrderForm order={buyOrder} />
+        <ItemsForm item={item} />
       </div>
     </div>
   );
-};
+}
 
 export default Items;

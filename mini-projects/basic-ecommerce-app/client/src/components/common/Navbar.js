@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTotals } from "../../features/CartSlice";
 
-const Navbar = () => {
+function Navbar() {
+  const dispatch = useDispatch();
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getTotals());
@@ -18,6 +18,7 @@ const Navbar = () => {
         <Link to="/" className="navbar-brand">
           <h4 className="text-secondary">Basic Ecommerce App</h4>
         </Link>
+
         <button
           type="button"
           className="navbar-toggler"
@@ -26,6 +27,7 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
             <div className="navbar-nav ml-auto">
@@ -58,6 +60,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;

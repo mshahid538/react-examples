@@ -8,8 +8,6 @@ import Dashboard from "./components/pages/buyerdashboard/dashboard";
 import Cart from "./components/pages/cart/Cart";
 import Checkout from "./components/pages/checkout/Checkout";
 
-import "./App.css";
-
 function App() {
   return (
     <>

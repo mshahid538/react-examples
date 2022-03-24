@@ -9,10 +9,9 @@ import {
 } from "../../../features/CartSlice";
 import "./Cart.css";
 
-const Cart = () => {
-  const cart = useSelector((state) => state.cart);
-
+function Cart() {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   React.useEffect(() => {
     dispatch(getTotals());
@@ -105,6 +104,6 @@ const Cart = () => {
       )}
     </div>
   );
-};
+}
 
 export default Cart;

@@ -1,19 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/AuthSlice";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
 
-const Login = () => {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = React.useState({
-    name: "",
+    username: "",
     password: "",
   });
 
-  const { name, password } = formData;
+  const { username, password } = formData;
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -24,9 +23,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     const userData = {
-      name,
+      username,
       password,
     };
+
     const user = dispatch(login(userData));
     if (!!user) {
       navigate("/dashboard");
@@ -41,20 +41,18 @@ const Login = () => {
             <div className="text-center mt-4 text-secondary">
               <h3>Login</h3>
             </div>
-
             <form className="mt-3">
               <div className="form-group col-12 col-lg-11 mx-auto">
                 <input
                   type="text"
-                  name="name"
-                  value={name}
+                  name="username"
+                  value={username}
                   onChange={handleChange}
                   placeholder="username"
                   className="form-control"
                   autoComplete="off"
                 />
               </div>
-
               <div className="form-group col-12 col-lg-11 mx-auto my-3">
                 <input
                   type="password"
@@ -65,7 +63,6 @@ const Login = () => {
                   className="form-control"
                 />
               </div>
-
               <div className="form-group text-center my-2">
                 <button
                   onClick={handleSubmit}
@@ -81,6 +78,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

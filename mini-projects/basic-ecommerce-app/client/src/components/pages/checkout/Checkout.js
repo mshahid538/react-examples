@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Checkout.css";
-const Checkout = () => {
+
+function Checkout() {
   return (
     <div className="container">
       <div className="row">
@@ -21,6 +22,6 @@ const Checkout = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Checkout;
