@@ -3,10 +3,10 @@ import ItemsTable from "./ItemsTable";
 import ItemsForm from "./ItemsForm";
 
 function Items() {
-  const [item, SetItem] = React.useState([]);
+  const [item, setItem] = React.useState([]);
 
   const handleEdit = (item) => {
-    SetItem(item);
+    setItem(item);
   };
 
   return (

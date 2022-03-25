@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { createItem, updateItem } from "../../../services/ItemService";
 import { CATEGORY_TYPE } from "../../../constants";
 
-function ItemsOrderForm({ item }) {
+function ItemsForm({ item }) {
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState(0);
   const [category, setCategory] = React.useState("");
@@ -44,11 +44,12 @@ function ItemsOrderForm({ item }) {
     desc === "" ||
     dateAdded === "";
 
-  const handleCreateOrder = async () => {
+  const handleCreateItem = async () => {
     if (isValidation) {
       setIsValidated(false);
       return;
     }
+
     const response = await createItem({
       name,
       price,
@@ -56,6 +57,7 @@ function ItemsOrderForm({ item }) {
       desc,
       dateAdded,
     });
+    
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
       return;
@@ -175,7 +177,7 @@ function ItemsOrderForm({ item }) {
                 <button
                   type="submit"
                   className="btn btn-outline-primary"
-                  onClick={handleCreateOrder}
+                  onClick={handleCreateItem}
                 >
                   Create
                 </button>
@@ -188,4 +190,4 @@ function ItemsOrderForm({ item }) {
   );
 }
 
-export default ItemsOrderForm;
+export default ItemsForm;

@@ -18,7 +18,6 @@ function Navbar() {
         <Link to="/" className="navbar-brand">
           <h4 className="text-secondary">Basic Ecommerce App</h4>
         </Link>
-
         <button
           type="button"
           className="navbar-toggler"
@@ -27,7 +26,6 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
             <div className="navbar-nav ml-auto">
