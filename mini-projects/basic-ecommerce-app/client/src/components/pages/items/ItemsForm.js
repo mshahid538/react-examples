@@ -57,7 +57,7 @@ function ItemsForm({ item }) {
       desc,
       dateAdded,
     });
-    
+
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
       return;
@@ -80,6 +80,7 @@ function ItemsForm({ item }) {
       return;
     }
   };
+
   return (
     <div className="card p-2 border shadow">
       <h6 className="text-center">Buyer Order Form</h6>

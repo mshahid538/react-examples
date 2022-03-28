@@ -13,7 +13,7 @@ function Checkout() {
               </div>
             </div>
             <div className="content">
-              <h1>Payment Success !</h1>
+              <h1>Order Submitted Successfully !</h1>
               <p>Thank You For Your Order! As well as trust on us!</p>
               <Link to="/dashboard">Want to Buy More..</Link>
             </div>

@@ -10,7 +10,7 @@ function ItemsTable({ onEdit, item }) {
 
   React.useEffect(() => {
     getItemsDB();
-  }, [tableItems, item]);
+  }, [item, tableItems]);
 
   const getItemsDB = async () => {
     const res = await getItems();
@@ -64,7 +64,6 @@ function ItemsTable({ onEdit, item }) {
                       <td className="text-center">{item.category}</td>
                       <td className="text-center text-nowrap">{item.desc}</td>
                       <td className="text-center">{item.dateAdded}</td>
-
                       <td className="text-center text-nowrap">
                         <ul className="list-inline m-0 ">
                           <li className="list-inline-item">

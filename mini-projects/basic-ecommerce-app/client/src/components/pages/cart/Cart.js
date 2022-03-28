@@ -31,10 +31,8 @@ function Cart() {
   };
 
   const handleCreateOrder = async () => {
-    let name = cart.name;
-    let balance = cart.cartTotalAmount;
-    let orderitems = cart.cartItems;
-    let buyerId = "62305a044faeaeedb91a0ef3"; // static userId/buyerId for order 
+    const { name, balance, orderitems } = cart;
+    let buyerId = "62305a044faeaeedb91a0ef3"; // static userId/buyerId for order
 
     const response = await createOrder({
       name,
@@ -46,9 +44,6 @@ function Cart() {
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
       return;
-    }
-    else {
-      toast.success("Order successfully created!");
     }
   };
 
@@ -111,7 +106,9 @@ function Cart() {
               <p>Taxes and shipping calculated at checkout</p>
               <div className="continue-shopping">
                 <Link to="/checkout">
-                  <button onClick={() => handleCreateOrder()}>Pay And Checkout</button>
+                  <button onClick={() => handleCreateOrder()}>
+                    Pay And Checkout
+                  </button>
                 </Link>
               </div>
               <div className="continue-shopping">

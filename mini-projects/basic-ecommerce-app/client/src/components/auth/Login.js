@@ -27,8 +27,8 @@ function Login() {
       password,
     };
 
-    const user = dispatch(login(userData));    
-    
+    const user = dispatch(login(userData));
+
     if (!!user) {
       navigate("/dashboard");
     }
@@ -46,8 +46,8 @@ function Login() {
               <div className="form-group col-12 col-lg-11 mx-auto">
                 <input
                   type="text"
-                  name="username"
-                  value={username}
+                  name="name"
+                  value={name}
                   onChange={handleChange}
                   placeholder="username"
                   className="form-control"

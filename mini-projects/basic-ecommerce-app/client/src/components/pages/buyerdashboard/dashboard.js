@@ -4,13 +4,13 @@ import { getItems } from "../../../services/ItemService";
 import { addToCart } from "../../../features/CartSlice";
 import "./dashboard.css";
 
-function Items() {
+function Dashboard() {
   const dispatch = useDispatch();
   const [itemData, setItemData] = React.useState([]);
 
   React.useEffect(() => {
     getItemsDb();
-  }, [itemData]);
+  }, []);
 
   const getItemsDb = async () => {
     const res = await getItems();
@@ -53,4 +53,4 @@ function Items() {
   );
 }
 
-export default Items;
+export default Dashboard;
