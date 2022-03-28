@@ -7,6 +7,7 @@ import {
   decreaseCart,
   getTotals,
 } from "../../../features/CartSlice";
+import { createOrder } from "../../../services/OrderService";
 import "./Cart.css";
 
 function Cart() {
@@ -27,6 +28,28 @@ function Cart() {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const handleCreateOrder = async () => {
+    let name = cart.name;
+    let balance = cart.cartTotalAmount;
+    let orderitems = cart.cartItems;
+    let buyerId = "62305a044faeaeedb91a0ef3"; // static userId/buyerId for order 
+
+    const response = await createOrder({
+      name,
+      balance,
+      orderitems,
+      buyerId,
+    });
+
+    if (response?.status !== 200) {
+      console.log(`Error: ${response.status} : ${response.statusText}`);
+      return;
+    }
+    else {
+      toast.success("Order successfully created!");
+    }
   };
 
   return (
@@ -88,13 +111,12 @@ function Cart() {
               <p>Taxes and shipping calculated at checkout</p>
               <div className="continue-shopping">
                 <Link to="/checkout">
-                  <button>Pay And Checkout</button>
+                  <button onClick={() => handleCreateOrder()}>Pay And Checkout</button>
                 </Link>
               </div>
               <div className="continue-shopping">
                 <Link to="/dashboard">
                   <i className="bi bi-arrow-left"></i>
-
                   <span>Continue Shopping</span>
                 </Link>
               </div>

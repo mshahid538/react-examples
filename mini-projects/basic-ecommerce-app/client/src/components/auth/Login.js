@@ -8,11 +8,11 @@ function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = React.useState({
-    username: "",
+    name: "",
     password: "",
   });
 
-  const { username, password } = formData;
+  const { name, password } = formData;
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -23,11 +23,12 @@ function Login() {
 
   const handleSubmit = (e) => {
     const userData = {
-      username,
+      name,
       password,
     };
 
-    const user = dispatch(login(userData));
+    const user = dispatch(login(userData));    
+    
     if (!!user) {
       navigate("/dashboard");
     }
