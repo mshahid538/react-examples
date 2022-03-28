@@ -26,13 +26,13 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log(req, "sadadsad");
+  const { name, desc, category, price, dateAdded } = req.body;
   const item = new Items({
-    name: req.body.name,
-    desc: req.body.desc,
-    category: req.body.category,
-    price: req.body.price,
-    dateAdded: req.body.dateAdded,
+    name,
+    desc,
+    category,
+    price,
+    dateAdded,
   });
 
   try {
