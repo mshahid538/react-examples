@@ -4,7 +4,7 @@ import {
   createBuyOrder,
   updateBuyOrder,
 } from "../../../services/BuyerOrderService";
-import { CATEGORY_TYPE } from "./ItemsOrderTable";
+import { CATEGORY_TYPE } from "../../../constants";
 
 const ItemsOrderForm = ({ order }) => {
   const [isValidated, setIsValidated] = React.useState(true);

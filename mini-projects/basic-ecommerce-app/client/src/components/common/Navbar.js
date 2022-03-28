@@ -36,7 +36,7 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
-            {!user ? (
+            {!!user ? (
               <div className="navbar-nav ml-auto">
                 <Link
                   to="/cart"

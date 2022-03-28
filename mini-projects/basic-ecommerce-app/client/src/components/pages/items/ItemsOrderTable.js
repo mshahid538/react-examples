@@ -7,12 +7,6 @@ import {
 } from "../../../services/BuyerOrderService";
 import { addToCart } from "../../../features/CartSlice";
 
-export const CATEGORY_TYPE = {
-  LATITUDE: "Latitude",
-  DELL: "Dell",
-  HP: "Hp",
-};
-
 const ItemsOrderTable = React.memo(function BuyOrderTable({ onEdit, order }) {
   const [buyOrders, setBuyOrders] = React.useState([]);
   const dispatch = useDispatch();

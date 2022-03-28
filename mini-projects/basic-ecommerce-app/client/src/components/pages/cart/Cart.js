@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -7,6 +8,7 @@ import {
   decreaseCart,
   getTotals,
 } from "../../../features/CartSlice";
+import { createOrder } from "../../../services/OrderService";
 import "./Cart.css";
 
 const Cart = () => {
@@ -28,6 +30,26 @@ const Cart = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const handleCreateOrder = async () => {
+    let name = cart.name;
+    let balance = cart.cartTotalAmount;
+    let orderitems = cart.cartItems;
+    let buyerId = "62305a044faeaeedb91a0ef3";
+
+    const response = await createOrder({
+      name,
+      balance,
+      orderitems,
+      buyerId,
+    });
+    if (response?.status !== 200) {
+      console.log(`Error: ${response.status} : ${response.statusText}`);
+      return;
+    } else {
+      toast.success("Order created successfully");
+    }
   };
 
   return (
@@ -87,8 +109,11 @@ const Cart = () => {
                 <span className="amount">${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <div className="continue-shopping">
-                <Link to="/checkout">
+              <div
+                className="continue-shopping"
+                onClick={() => handleCreateOrder()}
+              >
+                <Link to="">
                   <button>Pay And Checkout</button>
                 </Link>
               </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/AuthSlice";
 import { useNavigate } from "react-router-dom";
@@ -22,13 +23,20 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    const userData = {
-      name,
-      password,
-    };
-    const user = dispatch(login(userData));
-    if (!!user) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (name === "" || password === "") {
+      toast.error("Please enter name and password");
+    }
+
+    const response = await dispatch(login(formData));
+    console.log(
+      response.status,
+      response.payload.buyer,
+      "payload++++++++++++++"
+    );
+
+    if (response?.status === 200 && response.payload.token) {
       navigate("/dashboard");
     }
   };

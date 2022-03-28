@@ -5,14 +5,14 @@ import { addToCart } from "../../../features/CartSlice";
 // import { ItemsFetch } from "../../../features/ItemsSlice";
 import "./dashboard.css";
 
-const Items = () => {
+const Dashboard = () => {
   const [itemData, setItemData] = React.useState([]);
   const dispatch = useDispatch();
   // const { item } = useSelector((state) => state.items);
 
   React.useEffect(() => {
     getBuyOrders();
-  }, [itemData]);
+  }, []);
 
   const getBuyOrders = async () => {
     const res = await getBuyOrdersDB();
@@ -55,4 +55,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default Dashboard;

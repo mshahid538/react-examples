@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const { DB_URL } = require("./constants");
 const authRouter = require("./routes/auth");
 const itemsRouter = require("./routes/items");
+const ordersRouter = require("./routes/orders");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use("/auth", authRouter);
 app.use("/items", itemsRouter);
+app.use("/orders", ordersRouter);
 
 // Port Configuration
 app.listen(5000, () => {
