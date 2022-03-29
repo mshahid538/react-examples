@@ -1,7 +1,8 @@
 import React from "react";
+// redux
 import { useDispatch } from "react-redux";
-import { getItems } from "../../../services/ItemService";
 import { addToCart } from "../../../features/CartSlice";
+import { getItems } from "../../../services/ItemService";
 import "./dashboard.css";
 
 function Dashboard() {

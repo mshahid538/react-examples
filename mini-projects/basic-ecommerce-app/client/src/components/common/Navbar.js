@@ -1,16 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+// redux
 import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/AuthSlice";
 import { getTotals } from "../../features/CartSlice";
 
 function Navbar() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
@@ -21,38 +30,47 @@ function Navbar() {
         <button
           type="button"
           className="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
-            <div className="navbar-nav ml-auto">
-              <Link
-                to="/cart"
-                type="button"
-                className="nav-item nav-link position-relative border-0"
-              >
-                <i className="bi bi-bag"></i>Cart
-                <span className="position-absolute top-1 translate-middle badge rounded-pill bg-danger">
-                  {cartTotalQuantity}
-                </span>
-              </Link>
-              <Link to="/items" className="nav-item nav-link border-0">
-                <i className="bi bi-diagram-2"></i>Items
-              </Link>
+            {user ? (
+              <div className="navbar-nav ml-auto">
+                <Link
+                  to="/cart"
+                  type="button"
+                  className="nav-item nav-link position-relative border-0"
+                >
+                  <i className="bi bi-bag"></i>Cart
+                  <span className="position-absolute top-1 translate-middle badge rounded-pill bg-danger">
+                    {cartTotalQuantity}
+                  </span>
+                </Link>
+                <Link to="/items" className="nav-item nav-link border-0">
+                  <i className="bi bi-diagram-2"></i>Items
+                </Link>
 
-              <Link to="/dashboard" className="nav-item nav-link border-0">
-                <i className="bi bi-speedometer"></i> Dashboard
-              </Link>
-              <Link to="/login" className="nav-item nav-link border-0">
-                <i className="bi bi-box-arrow-right"></i> Logout
-              </Link>
-              <Link to="/login" className="nav-item nav-link">
-                <i className="bi bi-person"></i> Login
-              </Link>
-            </div>
+                <Link to="/dashboard" className="nav-item nav-link border-0">
+                  <i className="bi bi-speedometer"></i> Dashboard
+                </Link>
+                <Link
+                  to="/"
+                  className="nav-item nav-link border-0"
+                  onClick={handleLogout}
+                >
+                  <i className="bi bi-box-arrow-right"></i> Logout
+                </Link>
+              </div>
+            ) : (
+              <>
+                <Link to="/" className="nav-item nav-link">
+                  <i className="bi bi-person"></i> Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

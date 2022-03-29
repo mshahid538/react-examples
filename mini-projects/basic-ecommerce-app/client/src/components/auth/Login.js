@@ -1,18 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+// redux
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/AuthSlice";
 
 function Login() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [formData, setFormData] = React.useState({
     name: "",
     password: "",
   });
 
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { name, password } = formData;
+
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/dashboard");
+    }
+  }, [user, isError, isSuccess, message, navigate]);
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -27,18 +42,18 @@ function Login() {
       password,
     };
 
-    const user = dispatch(login(userData));
-
-    if (!!user) {
-      navigate("/dashboard");
-    }
+    dispatch(login(userData));
   };
 
+  if (isLoading) {
+    return <div className="spinner-border text-center"></div>;
+  }
+
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 pt-5">
       <div className="row">
         <div className="col-12 col-md-6 col-lg-4 mx-auto">
-          <div className="card shadow p-3  bg-light">
+          <div className="card shadow p-3 bg-light">
             <div className="text-center mt-4 text-secondary">
               <h3>Login</h3>
             </div>
@@ -66,9 +81,9 @@ function Login() {
               </div>
               <div className="form-group text-center my-2">
                 <button
-                  onClick={handleSubmit}
                   type="button"
                   className="btn btn-block btn-primary"
+                  onClick={handleSubmit}
                 >
                   Login
                 </button>

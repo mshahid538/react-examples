@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+// redux
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -7,12 +9,13 @@ import {
   decreaseCart,
   getTotals,
 } from "../../../features/CartSlice";
+// Service
 import { createOrder } from "../../../services/OrderService";
 import "./Cart.css";
 
 function Cart() {
-  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getTotals());
@@ -32,7 +35,7 @@ function Cart() {
 
   const handleCreateOrder = async () => {
     const { name, balance, orderitems } = cart;
-    let buyerId = "62305a044faeaeedb91a0ef3"; // static userId/buyerId for order
+    let buyerId = "62305a044faeaeedb91a0ef3"; // static userId/buyerId for order creation
 
     const response = await createOrder({
       name,
@@ -44,6 +47,8 @@ function Cart() {
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
       return;
+    } else {
+      toast.success("Order created successfully");
     }
   };
 
@@ -104,16 +109,18 @@ function Cart() {
                 <span className="amount">${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <div className="continue-shopping">
-                <Link to="/checkout">
-                  <button onClick={() => handleCreateOrder()}>
-                    Pay And Checkout
-                  </button>
+              <div
+                className="continue-shopping"
+                onClick={() => handleCreateOrder()}
+              >
+                <Link to="">
+                  <button>Pay And Checkout</button>
                 </Link>
               </div>
               <div className="continue-shopping">
                 <Link to="/dashboard">
                   <i className="bi bi-arrow-left"></i>
+
                   <span>Continue Shopping</span>
                 </Link>
               </div>
