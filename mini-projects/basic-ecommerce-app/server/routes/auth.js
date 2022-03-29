@@ -16,7 +16,7 @@ router.post("/signup/", (req, res) => {
       name: name,
       password: hash,
       email: email,
-      creationDate: new Date(), 
+      creationDate: new Date(),
     });
 
     buyer
@@ -43,15 +43,13 @@ router.post("/login", async (req, res) => {
     const result = await bcrypt.compare(password, buyer[0].password);
 
     if (!result) {
-      return res
-        .status(401)
-        .json({ message: "Buyer Authentication Failed ..." });
+      return res.status(401).json({ message: "Authentication Failed ..." });
     }
 
     const token = jwt.sign(
       {
         name: buyer[0].name,
-        email: buyer[0].email, 
+        email: buyer[0].email,
       },
       "this is my secret key",
       { expiresIn: "24h" }

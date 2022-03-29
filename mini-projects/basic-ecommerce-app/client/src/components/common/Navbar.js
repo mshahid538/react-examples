@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../features/AuthSlice";
+import { logout, reset } from "../../features/AuthSlice";
 import { getTotals } from "../../features/CartSlice";
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -29,14 +29,14 @@ const Navbar = () => {
         <button
           type="button"
           className="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
-            {!!user ? (
+            {user ? (
               <div className="navbar-nav ml-auto">
                 <Link
                   to="/cart"
@@ -56,7 +56,7 @@ const Navbar = () => {
                   <i className="bi bi-speedometer"></i> Dashboard
                 </Link>
                 <Link
-                  to="/login"
+                  to="/"
                   className="nav-item nav-link border-0"
                   onClick={handleLogout}
                 >
@@ -65,7 +65,7 @@ const Navbar = () => {
               </div>
             ) : (
               <>
-                <Link to="/login" className="nav-item nav-link">
+                <Link to="/" className="nav-item nav-link">
                   <i className="bi bi-person"></i> Login
                 </Link>
               </>

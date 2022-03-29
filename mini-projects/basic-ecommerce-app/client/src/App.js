@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./components/common/Navbar";
 import Login from "./components/auth/Login";
@@ -8,20 +13,20 @@ import Dashboard from "./components/pages/buyerdashboard/dashboard";
 import Cart from "./components/pages/cart/Cart";
 import Checkout from "./components/pages/checkout/Checkout";
 
-// import PrivateRoute from "./routes/PrivateRoute";
-// import { useSelector } from "react-redux";
+import PrivateRoute from "./routes/PrivateRoute";
+import { useSelector } from "react-redux";
 
 import "./App.css";
 
 function App() {
-  // const { user } = useSelector((state) => state.auth);
-  // const token = user.token;
-  const data = JSON.parse(localStorage.getItem("user"));
-  // console.log(data?.token);
-  const authenticated = data?.token;
-  // console.log(authenticated, "authenticated .............");
-  // }
-  // const { token } = data;
+  const { user } = useSelector((state) => state.auth);
+  console.log(user, "user form App ");
+
+  React.useEffect(() => {
+    if (!user) {
+      <Navigate to="/" />;
+    }
+  }, [user]);
 
   return (
     <>
@@ -30,13 +35,13 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
 
-            {/* <Route element={<PrivateRoute auth={authenticated} />}> */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/items" element={<Items />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route element={<PrivateRoute auth={user} />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/items" element={<Items />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Route>
           </Routes>
         </div>
       </Router>

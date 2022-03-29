@@ -1,20 +1,37 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { login } from "../../features/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../features/AuthSlice";
+
 import "./Login.css";
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [formData, setFormData] = React.useState({
     name: "",
     password: "",
   });
 
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { name, password } = formData;
+
+  console.log(user, "user from login++");
+
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/dashboard");
+    }
+  }, [user, isError, isSuccess, message, navigate]);
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -23,33 +40,27 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (name === "" || password === "") {
-      toast.error("Please enter name and password");
-    }
+  const handleSubmit = (e) => {
+    const userData = {
+      name,
+      password,
+    };
 
-    const response = await dispatch(login(formData));
-    console.log(
-      response.status,
-      response.payload.buyer,
-      "payload++++++++++++++"
-    );
-
-    if (response?.status === 200 && response.payload.token) {
-      navigate("/dashboard");
-    }
+    dispatch(login(userData));
   };
 
+  if (isLoading) {
+    return <div className="spinner-border text-center"></div>;
+  }
+
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 pt-5">
       <div className="row">
         <div className="col-12 col-md-6 col-lg-4 mx-auto">
-          <div className="card shadow p-3  bg-light">
+          <div className="card shadow p-3 bg-light">
             <div className="text-center mt-4 text-secondary">
               <h3>Login</h3>
             </div>
-
             <form className="mt-3">
               <div className="form-group col-12 col-lg-11 mx-auto">
                 <input
@@ -62,7 +73,6 @@ const Login = () => {
                   autoComplete="off"
                 />
               </div>
-
               <div className="form-group col-12 col-lg-11 mx-auto my-3">
                 <input
                   type="password"
@@ -73,12 +83,11 @@ const Login = () => {
                   className="form-control"
                 />
               </div>
-
               <div className="form-group text-center my-2">
                 <button
-                  onClick={handleSubmit}
                   type="button"
                   className="btn btn-block btn-primary"
+                  onClick={handleSubmit}
                 >
                   Login
                 </button>

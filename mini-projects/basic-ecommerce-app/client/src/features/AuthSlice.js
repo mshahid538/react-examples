@@ -1,9 +1,50 @@
+// import { toast } from "react-toastify";
+// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import authService from "../services/AuthService";
+
+// const initialState = {
+//   user: null,
+// };
+
+// // Login user
+// export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+//   try {
+//     const response = await authService.login(user);
+//     return response.data;
+//   } catch (error) {
+//     return thunkAPI.rejectWithValue(toast("Error while login"));
+//   }
+// });
+
+// export const logout = createAsyncThunk("auth/logout", async () => {
+//   await authService.logout();
+// });
+
+// export const authSlice = createSlice({
+//   name: "auth",
+//   initialState,
+//   reducers: {},
+//   extraReducers(builder) {
+//     builder.addCase(login.fulfilled, (state, action) => {
+//       return action.payload;
+//     });
+//   },
+// });
+
+// export default authSlice.reducer;
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import authService from "../services/AuthService";
+
+// Get user from localStorage
+// const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: null,
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: "",
 };
 
 // Login user
@@ -11,7 +52,11 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
     return await authService.login(user);
   } catch (error) {
-    return thunkAPI.rejectWithValue(toast("Error while login"));
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
 });
 
@@ -22,7 +67,47 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.user = null;
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+    },
+    logout: (state) => {
+      state.user = null;
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+        state.message = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = false;
+      });
+  },
 });
 
+export const { reset } = authSlice.actions;
 export default authSlice.reducer;
