@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// redux
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../../features/AuthSlice";
+import { logout } from "../../features/AuthSlice";
 import { getTotals } from "../../features/CartSlice";
 
-const Navbar = () => {
+function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -75,6 +76,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;

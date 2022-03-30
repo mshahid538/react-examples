@@ -1,12 +1,11 @@
 import React from "react";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+// redux
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/AuthSlice";
 
-import "./Login.css";
-
-const Login = () => {
+function Login() {
   const [formData, setFormData] = React.useState({
     name: "",
     password: "",
@@ -15,7 +14,6 @@ const Login = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,7 +43,6 @@ const Login = () => {
       name,
       password,
     };
-
     dispatch(login(userData));
   };
 
@@ -98,6 +95,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

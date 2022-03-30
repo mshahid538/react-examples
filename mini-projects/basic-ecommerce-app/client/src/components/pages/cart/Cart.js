@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+// reudx
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -13,9 +14,9 @@ import "./Cart.css";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  console.log(user, "user from cart++");
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
@@ -36,7 +37,7 @@ const Cart = () => {
     let name = cart.name;
     let balance = cart.cartTotalAmount;
     let orderitems = cart.cartItems;
-    let buyerId = "62305a044faeaeedb91a0ef3";
+    let buyerId = user.buyer._id;
 
     const response = await createOrder({
       name,
@@ -44,6 +45,7 @@ const Cart = () => {
       orderitems,
       buyerId,
     });
+
     if (response?.status !== 200) {
       console.log(`Error: ${response.status} : ${response.statusText}`);
       return;
@@ -120,7 +122,6 @@ const Cart = () => {
               <div className="continue-shopping">
                 <Link to="/dashboard">
                   <i className="bi bi-arrow-left"></i>
-
                   <span>Continue Shopping</span>
                 </Link>
               </div>

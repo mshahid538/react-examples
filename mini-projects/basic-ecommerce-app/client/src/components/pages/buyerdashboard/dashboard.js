@@ -1,18 +1,16 @@
 import React from "react";
+// redux
 import { useDispatch } from "react-redux";
 import { getBuyOrdersDB } from "../../../services/BuyerOrderService";
 import { addToCart } from "../../../features/CartSlice";
-// import { ItemsFetch } from "../../../features/ItemsSlice";
-import "./dashboard.css";
 
-const Dashboard = () => {
+function Dashboard() {
   const [itemData, setItemData] = React.useState([]);
   const dispatch = useDispatch();
-  // const { item } = useSelector((state) => state.items);
 
   React.useEffect(() => {
     getBuyOrders();
-  }, []);
+  }, [itemData]);
 
   const getBuyOrders = async () => {
     const res = await getBuyOrdersDB();
@@ -53,6 +51,6 @@ const Dashboard = () => {
       ))}
     </div>
   );
-};
+}
 
 export default Dashboard;

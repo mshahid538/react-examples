@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Checkout.css";
+
 const Checkout = () => {
   return (
     <div className="container">
