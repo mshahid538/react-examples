@@ -6,7 +6,7 @@ import {
 } from "../../../services/BuyerOrderService";
 import { CATEGORY_TYPE } from "../../../constants";
 
-const ItemsOrderForm = ({ order }) => {
+function ItemsOrderForm({ order }) {
   const [isValidated, setIsValidated] = React.useState(true);
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState(0);
@@ -188,6 +188,6 @@ const ItemsOrderForm = ({ order }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ItemsOrderForm;

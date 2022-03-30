@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 // reudx
@@ -12,12 +12,12 @@ import {
 import { createOrder } from "../../../services/OrderService";
 import "./Cart.css";
 
-const Cart = () => {
+function Cart() {
   const cart = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(user, "user from cart++");
-  useEffect(() => {
+
+  React.useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
@@ -77,7 +77,7 @@ const Cart = () => {
           </div>
           <div className="cart-items">
             {cart.cartItems.map((cartItem) => (
-              <div className="cart-item" key={cartItem.id}>
+              <div className="cart-item" key={cartItem.name}>
                 <div className="cart-product">
                   <div>
                     <h3>{cartItem.name}</h3>
@@ -131,6 +131,6 @@ const Cart = () => {
       )}
     </div>
   );
-};
+}
 
 export default Cart;

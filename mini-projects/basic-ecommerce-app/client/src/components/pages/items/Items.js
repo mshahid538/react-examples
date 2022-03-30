@@ -2,7 +2,7 @@ import React from "react";
 import ItemsOrderTable from "./ItemsOrderTable";
 import ItemsOrderForm from "./ItemsOrderForm";
 
-const Items = () => {
+function Items() {
   const [buyOrder, setBuyOrder] = React.useState([]);
 
   const handleEdit = (order) => {
@@ -19,6 +19,6 @@ const Items = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Items;
