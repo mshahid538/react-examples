@@ -5,8 +5,8 @@ import { getItems, deleteItem } from "../../../services/ItemService";
 import { addToCart } from "../../../features/CartSlice";
 
 function ItemsTable({ onEdit, item }) {
-  const [tableItems, setTableItems] = React.useState([]);
   const dispatch = useDispatch();
+  const [tableItems, setTableItems] = React.useState([]);
 
   React.useEffect(() => {
     getItemsDB();

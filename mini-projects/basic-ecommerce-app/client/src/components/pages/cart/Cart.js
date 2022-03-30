@@ -14,9 +14,9 @@ import { createOrder } from "../../../services/OrderService";
 import "./Cart.css";
 
 function Cart() {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getTotals());
