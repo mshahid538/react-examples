@@ -133,7 +133,6 @@ function ItemsForm({ item }) {
             </div>
           </div>
         </div>
-
         <div className="form-group my-3">
           <label htmlFor="name">Description*</label>
           <input
@@ -160,7 +159,6 @@ function ItemsForm({ item }) {
             error={!isValidated}
           />
         </div>
-
         <div className="form-group mb-2">
           <div className="d-flex justify-content-around ">
             {item && item.name ? (

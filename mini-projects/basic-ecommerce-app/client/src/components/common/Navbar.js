@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ function Navbar() {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
 
@@ -37,7 +37,7 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <div className="navbar-nav ml-auto">
-            {user ? (
+            {user && (
               <div className="navbar-nav ml-auto">
                 <Link
                   to="/cart"
@@ -64,7 +64,8 @@ function Navbar() {
                   <i className="bi bi-box-arrow-right"></i> Logout
                 </Link>
               </div>
-            ) : (
+            )}
+            {!user && (
               <>
                 <Link to="/" className="nav-item nav-link">
                   <i className="bi bi-person"></i> Login

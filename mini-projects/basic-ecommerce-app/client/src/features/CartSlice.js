@@ -27,6 +27,7 @@ const cartSlice = createSlice({
         toast.success("Item added to cart");
       }
     },
+
     decreaseCart(state, action) {
       const itemIndex = state.cartItems.findIndex(
         (cartItem) => cartItem._id === action.payload._id
@@ -39,6 +40,7 @@ const cartSlice = createSlice({
         toast.info("Decreased item quantity");
       }
     },
+
     removeFromCart(state, action) {
       state.cartItems.map((cartItem) => {
         if (cartItem.id === action.payload.id) {
@@ -55,6 +57,7 @@ const cartSlice = createSlice({
         return state;
       });
     },
+
     getTotals(state, action) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
@@ -73,6 +76,7 @@ const cartSlice = createSlice({
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
     },
+
     clearCart(state, action) {
       state.cartItems = [];
       toast.error("Cart cleared", { position: "bottom-left" });

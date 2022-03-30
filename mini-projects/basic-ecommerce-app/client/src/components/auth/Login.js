@@ -11,7 +11,7 @@ function Login() {
     password: "",
   });
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, message } = useSelector(
     (state) => state.auth
   );
   const navigate = useNavigate();
@@ -24,24 +24,24 @@ function Login() {
       toast.error(message);
     }
 
-    if (isSuccess || user) {
+    if (user) {
       navigate("/dashboard");
     }
-  }, [user, isError, isSuccess, message, navigate]);
+  }, [user, isError, message, navigate]);
 
   const handleChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
+    if (name === "" || password === "") {
+      toast.error("Please filled the fields!");
+    }
+
     const userData = {
       name,
       password,
     };
-
     dispatch(login(userData));
   };
 

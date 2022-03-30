@@ -10,7 +10,7 @@ function Dashboard() {
 
   React.useEffect(() => {
     getItemsDb();
-  }, []);
+  }, [itemData]);
 
   const getItemsDb = async () => {
     const res = await getItems();

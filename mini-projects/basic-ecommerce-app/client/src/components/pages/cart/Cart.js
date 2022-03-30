@@ -15,6 +15,7 @@ import "./Cart.css";
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -34,8 +35,10 @@ function Cart() {
   };
 
   const handleCreateOrder = async () => {
-    const { name, balance, orderitems } = cart;
-    let buyerId = "62305a044faeaeedb91a0ef3"; // static userId/buyerId for order creation
+    let name = cart.name;
+    let balance = cart.cartTotalAmount;
+    let orderitems = cart.cartItems;
+    let buyerId = user.buyer._id;
 
     const response = await createOrder({
       name,
