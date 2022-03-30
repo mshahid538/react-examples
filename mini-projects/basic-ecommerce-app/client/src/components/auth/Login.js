@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/AuthSlice";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user, isLoading, isError, message } = useSelector(
     (state) => state.auth
   );
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const [formData, setFormData] = React.useState({
     name: "",
     password: "",
