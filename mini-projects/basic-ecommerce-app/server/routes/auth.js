@@ -16,7 +16,7 @@ router.post("/signup/", (req, res) => {
       name: name,
       password: hash,
       email: email,
-      creationDate: new Date(), 
+      creationDate: new Date(),
     });
 
     buyer
@@ -50,8 +50,9 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       {
-        name: buyer[0].name,
-        email: buyer[0].email, 
+        buyer: [name, password],
+        name: buyer,
+        password: buyer,
       },
       "this is my secret key",
       { expiresIn: "24h" }
