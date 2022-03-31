@@ -2,33 +2,19 @@ import React from "react";
 import { BOOKS_LIST } from "../../constants/booksConstants";
 
 function Counter() {
+  //useState:
   const [count, setCount] = React.useState(5);
   const [student, setStudent] = React.useState({
-    name: "shahajhan",
+    name: "student name",
     age: 44,
     gender: "Male",
   });
   const [books, setBooks] = React.useState(BOOKS_LIST);
   const [isShowBooks, setIsShowBooks] = React.useState(false);
 
-  // component did mount
-  React.useEffect(() => {
-    // alert('welcome to Counter app');
-  }, []);
+  
 
-  // component did updated
-  React.useEffect(() => {
-    // alert('Counter is updated');
-  }, [count]);
-
-  // component will unmount
-  // React.useEffect( () => {
-  //     alert('Counter is updated');
-  //     return () => {
-  //         setCount(0);
-  //     }
-  // },[setCount]);
-
+  //useMemo
   const TotalBooksAmount = React.useMemo(() => {
     console.log(" useMemo Called");
     //using map()
@@ -53,6 +39,18 @@ function Counter() {
   };
   return (
     <>
+      <p>
+        <h3>useState(): hook used to manage the state.</h3>
+        <h4>5-usecases of useState hook:</h4>
+        <ul>
+          <li>State Management</li>
+          <li>Conditional Rendering</li>
+          <li>Counters</li>
+          <li>Toggle Flags</li>
+          <li>Fetch Data from API & Store Local State.</li>
+        </ul>
+      </p>
+      <hr></hr>
       <button onClick={() => setIsShowBooks(!isShowBooks)}>Toggle Books</button>
       <h2>Counter App</h2>
       <label>
