@@ -11,12 +11,11 @@ function App() {
   return (
     <>
       <h3>What are Hooks?</h3>
-      Hooks allow us to "hook" into React features such as state and lifecycle
-      methods. Hooks were added to React in version 16.8. Hooks allow function
-      components to have access to state and other React features. Because of
-      this, class components are generally no longer needed.
       <p>
-        <Route path="/usestate" element={<UseState />}></Route>
+        Hooks allow us to "hook" into React features such as state and lifecycle
+        methods. Hooks were added to React in version 16.8. Hooks allow function
+        components to have access to state and other React features. Because of
+        this, class components are generally no longer needed.
       </p>
       <BrowserRouter>
         <Routes>
