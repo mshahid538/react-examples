@@ -6,6 +6,7 @@ import UseMemo from "./components/usememo/UseMemo";
 import UseContext from "./components/usecontext/UseContext";
 import UseCallback from "./components/usecallback/UseCallback";
 import UseReducer from "./components/usereducer/UseReducer";
+import CustomHooks from "./components/customhooks/CustomHooks";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/usecontext" element={<UseContext />}></Route>
           <Route path="/useCallback" element={<UseCallback />}></Route>
           <Route path="/usereducer" element={<UseReducer />}></Route>
+          <Route path="/customhooks" element={<CustomHooks />}></Route>
         </Routes>
         <ul>
           <li>
@@ -48,6 +50,9 @@ function App() {
           </li>
           <li>
             <Link to="/usereducer">useReducer</Link>
+          </li>
+          <li>
+            <Link to="/customhooks">customHooks</Link>
           </li>
         </ul>
       </BrowserRouter>
