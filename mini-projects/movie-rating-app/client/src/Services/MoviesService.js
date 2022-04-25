@@ -5,7 +5,8 @@ const api_key = `api_key=${API_KEY}`;
 const query_param = 'query=jaws';
 
 export const getConfigureMovieAPI = async () => {
-    const configure = await axios.get(`${API_URL}/configuration?${api_key}`); 
+    const configure = await axios.get(`${API_URL}/configuration?${api_key}`);  
+    return configure;
 }
 
 export const getAllMovies = async() => { 

@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import "./App.scss";
+import MovieDetail from "./components/MovieDetail";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/stats" element={<Stats />} />
+                <Route path="/movie-detail/:id" element={<MovieDetail />} /> 
                 {/* Catch all */}
                 <Route path="*" element={<Home />}></Route>
               </Routes>
