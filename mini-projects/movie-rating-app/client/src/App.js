@@ -14,24 +14,20 @@ function App() {
   return (
     <Container maxWidth="xl">
       <Grid item xs={12}>
-        <Card sx={{ minWidth: 275 }}>
-          <CardContent>
-            <Router>
-              <Grid item xs={12}>
-                <Navbar />
-              </Grid>
-              <Routes>
-                {/* Public routes */}
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/stats" element={<Stats />} />
-                <Route path="/movie-detail/:id" element={<MovieDetail />} /> 
-                {/* Catch all */}
-                <Route path="*" element={<Home />}></Route>
-              </Routes>
-            </Router>
-          </CardContent>
-        </Card>
+        <Router>
+          <Grid item xs={12}>
+            <Navbar />
+          </Grid>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/stats" element={<Stats />} />
+            <Route path="/movie-detail/:id" element={<MovieDetail />} />
+            {/* Catch all */}
+            <Route path="*" element={<Home />}></Route>
+          </Routes>
+        </Router>
       </Grid>
     </Container>
   );

@@ -1,12 +1,24 @@
 import React from "react";
+import Typography from "@mui/material/Typography";
+
+import "./MovieDetail.scss";
 
 function MovieDetail({ movie }) {
-  return(
-      <>
-        {/* for (const [key, value] of Object.entries(movie)) {
-            <h3>{key}: {value}</h3>
-        }  */}
-      </> 
+  console.log("asdadx", movie);
+  return (
+    <div className="movieDetail">
+      <Typography variant="h3" align="center">
+        ksajdksadksha
+      </Typography>
+      <Typography variant="h3" align="center" paragraph='true'>
+        ksajdksadksha
+        asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddd
+      </Typography>
+    </div>
   );
 }
 

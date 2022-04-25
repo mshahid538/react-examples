@@ -8,6 +8,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { getConfigureMovieAPI } from "../../Services/MoviesService";
 import { useNavigate } from "react-router-dom";
+import Paper from "@mui/material/Paper";
+import Box from '@mui/material/Box';
+import "./MovieCard.scss";
 
 function MovieCard({ movie }) {
   const navigate = useNavigate();
@@ -23,37 +26,38 @@ function MovieCard({ movie }) {
     !config && getConfigurations();
   });
 
-  const PosterPic = `${config?.data?.images?.base_url}${movie.poster_path}`;
+  const PosterPic = `${config?.data?.images?.base_url}/original/${movie.poster_path}`;
+  
 
   return (
     <Grid
       container
       item
       xs={4}
-      classes={"MuiGrid-item"}
+      className='container'
       justifyContent="center"
       alignItems="center"
     >
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={PosterPic}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {movie.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" onClick={ ()=> navigate(`/movie-detail/id=${movie.id}`)}>
-            {movie.overview}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">{movie.vote_average}</Button>
-          <Button size="small">{movie.vote_count}</Button>
-        </CardActions>
-      </Card>
+      <Paper elevation={3} onClick={ ()=> navigate(`/movie-detail/id=${movie.id}`)}>
+        <Card className="card">
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            className="imageSize"
+            image={PosterPic}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {movie.title}
+            </Typography>{" "}
+          </CardContent>
+          <CardActions>
+            <Button size="small">{movie.vote_average}</Button>
+            <Button size="small">{movie.vote_count}</Button>
+          </CardActions>
+        </Card>
+      </Paper>
+      
     </Grid>
   );
 }

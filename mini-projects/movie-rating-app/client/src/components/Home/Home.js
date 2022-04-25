@@ -2,6 +2,7 @@ import React from "react";
 import { getAllMovies } from "../../Services/MoviesService";
 import MovieCard from "../MovieCard";
 import Grid from "@mui/material/Grid";
+import './Home.scss'
 
 function Home() {
   const [movies, setMovies] = React.useState([]);
@@ -16,7 +17,7 @@ function Home() {
   }, [movies]);
 
   return (
-    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    <Grid container rowSpacing={1} className="MarginTop" >
       {movies.map((movie, ind) => {
         return <MovieCard movie={movie} />;
       })}
