@@ -9,24 +9,15 @@ import Typography from "@mui/material/Typography";
 import { getConfigureMovieAPI } from "../../Services/MoviesService";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import Box from '@mui/material/Box';
+
 import "./MovieCard.scss";
+import { useDispatch, useSelector } from "react-redux";
 
 function MovieCard({ movie }) {
   const navigate = useNavigate();
-  const [config, setConfig] = React.useState(null);
+  const baseURL=useSelector((state) => state.ImagePath.value);  
 
-  React.useEffect(() => {
-    const getConfigurations = async () => {
-      const myConfig = await getConfigureMovieAPI();
-      console.log("aaaaaaaaaaaa", myConfig);
-      setConfig(myConfig);
-    };
-
-    !config && getConfigurations();
-  });
-
-  const PosterPic = `${config?.data?.images?.base_url}/original/${movie.poster_path}`;
+  const PosterPic = `${baseURL}/original/${movie.poster_path}`;
   
 
   return (
