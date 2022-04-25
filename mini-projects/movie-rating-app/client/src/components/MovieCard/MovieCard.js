@@ -6,14 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { getConfigureMovieAPI } from "../../Services/MoviesService";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Slider from '@mui/material/Slider';
+import Slider from "@mui/material/Slider";
+import { useSelector } from "react-redux";
+import { saveNewRating } from "../../Services/MoviesService";
+import Snackbar from "@mui/material/Snackbar";
 import "./MovieCard.scss";
-import { useDispatch, useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -31,14 +32,22 @@ const style = {
 function MovieCard({ movie }) {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [snackOpen, setSnackOpen] = React.useState(false);
+  const [rating, setRating] = React.useState(0);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
-  const baseURL=useSelector((state) => state.ImagePath.value);  
+
+  const baseURL = useSelector((state) => state.ImagePath.value);
 
   const PosterPic = `${baseURL}/original/${movie.poster_path}`;
-  
+
+  const handleSubmit = async () => {
+    const res = await saveNewRating(movie.id, rating);
+    setSnackOpen(true);
+
+    handleClose();
+  };
 
   return (
     <>
@@ -75,7 +84,6 @@ function MovieCard({ movie }) {
           </Card>
         </Paper>
       </Grid>
-
       <Modal
         open={open}
         onClose={handleClose}
@@ -83,7 +91,7 @@ function MovieCard({ movie }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h4" component="h2">
             Rating for {movie.title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -91,18 +99,40 @@ function MovieCard({ movie }) {
             {movie.vote_count}
           </Typography>
 
-          <Box width={300}>
+          <Box width={"100%"}>
+            <h3>Give New Rating</h3>
             <Slider
               defaultValue={0}
               aria-label="Default"
               valueLabelDisplay="auto"
               min={0}
-              max={10} 
-
+              max={10}
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
             />
+
+            <Button variant="contained" fullWidth onClick={handleSubmit}>
+              Submit
+            </Button>
+            <Button
+              variant="outlined"
+              color="info"
+              fullWidth
+              style={{ marginTop: "5px" }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
           </Box>
         </Box>
       </Modal>
+      <Snackbar
+        open={snackOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackOpen(false)}
+        message="Movie Rated Successfully" 
+        color='success'
+      /> 
     </>
   );
 }

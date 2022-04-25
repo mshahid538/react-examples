@@ -15,3 +15,11 @@ export const getAllMovies = async() => {
     return response.data;
 }
 
+export const saveNewRating = async(id, rating) => { 
+    // const response = await axios.get(`${API_URL}/search/movie?${api_key}&${query_param}`);
+     
+    // return response.data;
+    return true;
+}
+
+
