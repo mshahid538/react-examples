@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Slider from '@mui/material/Slider';
 import "./MovieCard.scss";
+import { useDispatch, useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -29,23 +30,15 @@ const style = {
 
 function MovieCard({ movie }) {
   const navigate = useNavigate();
-
-  const [config, setConfig] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
+  const baseURL=useSelector((state) => state.ImagePath.value);  
 
-  React.useEffect(() => {
-    const getConfigurations = async () => {
-      const myConfig = await getConfigureMovieAPI();
-      setConfig(myConfig);
-    };
-
-    !config && getConfigurations();
-  });
-
-  const PosterPic = `${config?.data?.images?.base_url}/original/${movie.poster_path}`;
+  const PosterPic = `${baseURL}/original/${movie.poster_path}`;
+  
 
   return (
     <>
