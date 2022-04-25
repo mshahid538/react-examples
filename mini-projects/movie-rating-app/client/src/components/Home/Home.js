@@ -2,23 +2,27 @@ import React from "react";
 import { getAllMovies } from "../../Services/MoviesService";
 import MovieCard from "../MovieCard";
 import Grid from "@mui/material/Grid";
-import './Home.scss'
+import './Home.scss' 
+import { useDispatch, useSelector } from "react-redux";
+import { saveMoviesList } from '../../features/MoviesSlice';
 
-function Home() {
-  const [movies, setMovies] = React.useState([]);
+function Home() { 
+  const dispatch = useDispatch(); 
+
+  const moviesList = useSelector((state) => state.Movies.value);  
 
   React.useEffect(() => {
     const getMovies = async () => {
-      const moviesList = await getAllMovies();
-      setMovies(moviesList?.results);
+      const movies = await getAllMovies(); 
+      dispatch(saveMoviesList(movies?.results)); 
     };
-
-    !movies.length > 0 && getMovies();
-  }, [movies]);
-
+ 
+    !moviesList.length > 0 && getMovies();
+  }, [moviesList]);
+ 
   return (
     <Grid container rowSpacing={1} className="MarginTop" >
-      {movies.map((movie, ind) => {
+      {moviesList?.map((movie, ind) => {
         return <MovieCard movie={movie} />;
       })}
     </Grid>

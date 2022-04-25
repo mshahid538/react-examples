@@ -2,15 +2,22 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 
 import "./MovieDetail.scss";
+import {  useSelector } from "react-redux";   
+import {useParams} from 'react-router-dom';
 
-function MovieDetail({ movie }) {
-  console.log("asdadx", movie);
+function MovieDetail() {
+  let { id } = useParams(); 
+ 
+  const movie = useSelector((state) =>
+    state.Movies.value.find((x) => x.id ===  parseInt(id.split('=')[1]))
+  );
+ 
   return (
     <div className="movieDetail">
       <Typography variant="h3" align="center">
-        ksajdksadksha
+        {movie.title}
       </Typography>
-      <Typography variant="h3" align="center" paragraph='true'>
+      <Typography variant="h3" align="center" paragraph="true">
         ksajdksadksha
         asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
