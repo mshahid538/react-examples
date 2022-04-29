@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import UseState from "./components/usestate/UseState";
 import UseEffect from "./components/useeffect/UseEffect";
+import UseLayoutEffect from "./components/uselayouteffect/UseLayoutEffect";
 import UseRef from "./components/useref/UseRef";
 import UseMemo from "./components/usememo/UseMemo";
 import UseContext from "./components/usecontext/UseContext";
@@ -22,6 +23,10 @@ function App() {
         <Routes>
           <Route path="/usestate" element={<UseState />}></Route>
           <Route path="/useeffect" element={<UseEffect />}></Route>
+          <Route
+            path="/use-layout-effect"
+            element={<UseLayoutEffect />}
+          ></Route>
           <Route path="/useref" element={<UseRef />}></Route>
           <Route path="/usememo" element={<UseMemo />}></Route>
           <Route path="/usecontext" element={<UseContext />}></Route>
@@ -35,6 +40,9 @@ function App() {
           </li>
           <li>
             <Link to="/useeffect">useEffect</Link>
+          </li>
+          <li>
+            <Link to="/use-layout-effect">useLayoutEffect</Link>
           </li>
           <li>
             <Link to="/useref">useRef</Link>
